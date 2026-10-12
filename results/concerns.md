@@ -14,6 +14,10 @@
 
 - 357 cells (293 rows) fall outside Tukey fences and are listed in `outlier_params`. Extreme ambient values (anoxic DO, estuarine chlorides) are frequently real events; no domain-specific water-quality threshold was applied.
 
+## Outlier fences are pooled in the primary profile
+
+- The combined file's `outlier_params` uses IQR fences pooled across all three water bodies (primary profile). Per-water-body fences are provided additively in `outliers_per_river.csv` and the `outlier_params_river` column of each per-river CSV; `outliers_fence_compare.csv` lists the flagged-cell difference per parameter. Values are kept in both, and `fence_method` labels every outlier table.
+
 ## Paper retained its outliers
 
 - The reference paper does NOT remove or cap its outliers, and neither do we (IQR flagging only, values kept). Report this as retained, never as removed.

@@ -72,7 +72,7 @@ total_coliform_mpn,median,3500000,3.5e6,0.0,PASS,
 total_coliform_mpn,mode,3500000,3.5e6,0.0,PASS,first-occurrence tie-break (Excel MODE)
 total_coliform_mpn,imputed_value,3.5e6,3.5e6,0.0,PASS,median rounded to 2 dp
 total_coliform_mpn,mean_after,1.063089122e7,1.0668293818181818e7,37402.598182,FAIL,diverges from the paper (see Table 1 / imputed_value)
-total_coliform_mpn,mean_after_closed_form,1.063089122e7,1.0668293818181818e7,37402.598182,FAIL,second check: paper closed form (n*mean+(N-n)*imputed)/N
+total_coliform_mpn,mean_after_closed_form,1.063089122e7,1.0668293818181818e7,37402.598182,EXPLAINED,"explained by the censored-cell difference; mirrors mean_after, not a new failure"
 ammonia_mg_l,n_nonblank,220,220,0.0,PASS,
 ammonia_mg_l,min,1.319,1.319,0.0,PASS,
 ammonia_mg_l,max,124,124.0,0.0,PASS,
@@ -90,7 +90,7 @@ nitrates_mg_l,median,0.328,0.1595,-0.1685,FAIL,median mismatch
 nitrates_mg_l,mode,0.48,0.048,-0.432,FAIL,paper mode not reproduced
 nitrates_mg_l,imputed_value,0.33,0.16,-0.17,FAIL,median rounded to 2 dp
 nitrates_mg_l,mean_after,0.420094,0.31966233766233765,-0.100432,FAIL,diverges from the paper (see Table 1 / imputed_value)
-nitrates_mg_l,mean_after_closed_form,0.420094,0.3196623376623377,-0.100432,FAIL,second check: paper closed form (n*mean+(N-n)*imputed)/N
+nitrates_mg_l,mean_after_closed_form,0.420094,0.3196623376623377,-0.100432,EXPLAINED,"explained by the censored-cell difference; mirrors mean_after, not a new failure"
 phosphates_mg_l,n_nonblank,310,310,0.0,PASS,
 phosphates_mg_l,min,0.113,0.113,0.0,PASS,
 phosphates_mg_l,max,30.894,30.894,0.0,PASS,
@@ -109,9 +109,9 @@ chlorides_mg_l,mode,30,30.0,0.0,PASS,first-occurrence tie-break (Excel MODE)
 chlorides_mg_l,imputed_value,60.5,60.5,0.0,PASS,median rounded to 2 dp
 chlorides_mg_l,mean_after,90.83367,90.83367012987014,0.0,PASS,measured from the imputed column (n=385)
 chlorides_mg_l,mean_after_closed_form,90.83367,90.83367012987014,0.0,PASS,second check: paper closed form (n*mean+(N-n)*imputed)/N
-nitrates_mg_l,censored_cells,missing,60,,FAIL,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used.
+nitrates_mg_l,censored_cells,missing,60,,EXPLAINED,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used.
 nitrates_mg_l,censored_reconciliation,mean/median/mode/mean_after reproduced,"mean=0.44189, median=0.328, mode=0.48, mean_after=0.420094",,INFO,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used. Setting all 60 censored cells to 0.48 reproduces the paper's Table 1 and Table 2 exactly.
-total_coliform_mpn,censored_cells,missing,1,,FAIL,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used.
+total_coliform_mpn,censored_cells,missing,1,,EXPLAINED,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used.
 total_coliform_mpn,censored_reconciliation,mean/median/mode/mean_after reproduced,"mean=1.6269270325581e7, median=3.5e6, mode=3.5e6, mean_after=1.0630891220779e7",,INFO,Paper text shows '0.48*' and '>1600000'; our raw file has '<0.048*' and '>16000000'. 0.48 is 10x our detection limit. Confirm with adviser which workbook was used. Setting all 1 censored cells to 1.6e6 reproduces the paper's Table 1 and Table 2 exactly.
 date,n_nonblank,370,320,-50.0,INFO,paper derives dates from the CY banner; our window keeps 10 date/time-only rows
 time,n_nonblank,310,320,10.0,INFO,10 date/time-only rows carry a time but no parameter

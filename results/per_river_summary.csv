@@ -1,0 +1,4 @@
+water_body,records_extracted,duplicates_removed,zero_measurement_removed,rows_final,stations,cells_imputed,rows_outlier_pooled,rows_outlier_per_river
+Marilao,475,31,74,370,5,47,113,112
+Meycauayan,420,0,50,370,5,51,124,120
+Obando,252,0,51,201,3,18,56,69

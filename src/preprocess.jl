@@ -130,6 +130,17 @@ is_stray_string(v) = v isa AbstractString && !is_placeholder(v)
  without modifying the stored value yet."
 norm_key(s::AbstractString) = lowercase(strip(replace(s, r"\s+" => " ")))
 
+"Full-row duplicate mask ignoring the provenance `record_id`, which is unique by
+ construction and must not hide genuine duplicate rows."
+exact_dup_mask(df::DataFrame) =
+    "record_id" in names(df) ? nonunique(select(df, Not(:record_id))) :
+    nonunique(df)
+
+"Number of analysis variables: every column except the provenance reference key
+ `record_id`. Keeps the completeness/variable accounting stable when the key is
+ added, because a reference key is not a measured variable."
+n_analysis(df::DataFrame) = count(c -> c != "record_id", names(df))
+
 # =============================================================================
 # STAGE 1 — LOAD AND INSPECT THE RAW DATA
 # WHAT: open the workbook, verify sheet roles, compare header rows across the
@@ -218,7 +229,10 @@ function extract_records()
                 n_records += 1
                 records_per_sheet[name] = get(records_per_sheet, name, 0) + 1
                 vals = ntuple(i -> row[i], N_RAW)
-                push!(recs, (period = period, vals = vals, water_body = name))
+                # sheet_row is the 1-based row in the worksheet; with water_body
+                # it forms a provenance id that survives every later stage.
+                push!(recs, (period = period, vals = vals, water_body = name,
+                             sheet_row = r))
             elseif v1 isa AbstractString && startswith(v1, "CY ")
                 period = v1
                 n_period_labels += 1
@@ -234,14 +248,20 @@ function extract_records()
     end
     close_xlsx(xf)
 
-    # materialize DataFrame with canonical raw headers + Period/Water Body
+    # materialize DataFrame with canonical raw headers + Water Body / Record ID
     data = [getfield(r, :vals)[i] for r in recs, i in 1:N_RAW]
     df = DataFrame(data, RAW_NAMES, makeunique = true)
-    df = hcat(DataFrame(period = [r.period for r in recs],
-                        water_body = [r.water_body for r in recs]),
-              df)
+    # water_body is the FIRST column, then the provenance record_id, then the
+    # period context. record_id = "<water_body>-<worksheet row>" so every record
+    # can be traced back to its source cell even after rows are removed.
+    ids = DataFrame(
+        water_body = [r.water_body for r in recs],
+        record_id  = [string(r.water_body, "-", r.sheet_row) for r in recs],
+        period     = [r.period for r in recs])
+    df = hcat(ids, df)
 
     @assert nrow(df) == n_records "record count mismatch"
+    @assert allunique(df.record_id) "record_id is not unique"
     return df, (; n_records, n_period_labels, n_skipped_content,
                 n_skipped_blank, n_stray_cells, records_per_sheet)
 end
@@ -315,7 +335,7 @@ end
 
 function stage3_duplicate_assessment(df::DataFrame)
     banner("STAGE 3 — DUPLICATE RECORD ASSESSMENT (before)")
-    n_exact = count(nonunique(df))
+    n_exact = count(exact_dup_mask(df))
     keys = dup_keys(df)
     n_key = count(nonunique(DataFrame(k = keys)))
     println("Exact full-row duplicates : ", n_exact)
@@ -409,7 +429,7 @@ end
 # WHY : every removal is logged; nothing is silently dropped.
 # =============================================================================
 function same_row(df::DataFrame, i::Int, j::Int)
-    all(c -> isequal(df[i, c], df[j, c]), names(df))
+    all(c -> c == "record_id" || isequal(df[i, c], df[j, c]), names(df))
 end
 
 function stage5_remove!(df::DataFrame)
@@ -766,11 +786,12 @@ function stage8_flag_outliers!(df::DataFrame)
                      lower_fence = round(lo; digits = 3),
                      upper_fence = round(hi; digits = 3),
                      n_iqr_outliers = n_iqr, n_zscore_gt3 = n_z,
-                     min = minimum(v), max = maximum(v)))
+                     min = minimum(v), max = maximum(v),
+                     fence_method = "pooled across all water bodies (primary profile)"))
     end
     df.outlier_params = join.(flags, ";")
     pretty_table(DataFrame(rows), alignment = [:l, :r, :r, :r, :r, :r, :r,
-                                               :r, :r, :r, :r, :r])
+                                               :r, :r, :r, :r, :r, :l])
     CSV.write(joinpath(RESULTS_DIR, "outliers.csv"), DataFrame(rows))
     println("Total IQR-flagged cells: ", n_total,
             " (all KEPT — flagged only, in outlier_params)")
@@ -839,9 +860,9 @@ function stage10_transform!(df::DataFrame)
             n_renamed += 1
         end
     end
-    order = ["period_label", "water_body", "station_no", "station",
-             "latitude", "longitude", "date", "time", "year", "month",
-             "date_source", PARAM_KEY..., "below_dl", "above_range",
+    order = ["water_body", "record_id", "period_label", "station_no",
+             "station", "latitude", "longitude", "date", "time", "year",
+             "month", "date_source", PARAM_KEY..., "below_dl", "above_range",
              "parse_issues", "imputed_params", "outlier_params"]
     select!(df, order)
     println("Columns renamed to snake_case: ", n_renamed)
@@ -866,11 +887,12 @@ function stage11_validate(df::DataFrame, n_extracted::Int,
 
     @assert nrow(df) == n_extracted - removed_empty - removed_dupe "row conservation failed"
     @assert allunique(names(df)) "duplicate column names"
-    @assert names(df) == ["period_label", "water_body", "station_no",
-                          "station", "latitude", "longitude", "date", "time",
-                          "year", "month", "date_source", PARAM_KEY...,
-                          "below_dl", "above_range", "parse_issues",
-                          "imputed_params", "outlier_params"] "unexpected schema"
+    @assert names(df) == ["water_body", "record_id", "period_label",
+                          "station_no", "station", "latitude", "longitude",
+                          "date", "time", "year", "month", "date_source",
+                          PARAM_KEY..., "below_dl", "above_range",
+                          "parse_issues", "imputed_params",
+                          "outlier_params"] "unexpected schema"
 
     # domain checks — only on columns that exist (they all do here)
     ph = collect(skipmissing(df.ph))
@@ -994,6 +1016,7 @@ include(joinpath(@__DIR__, "ui", "tokens.jl"))
 include(joinpath(@__DIR__, "ui", "theme_makie.jl"))
 include(joinpath(@__DIR__, "report_figures.jl"))
 include(joinpath(@__DIR__, "parity.jl"))          # :paper_parity profile + regression
+include(joinpath(@__DIR__, "rivers.jl"))          # water-body separation (Phase A)
 include(joinpath(@__DIR__, "report_artifacts.jl"))
 
 # =============================================================================
@@ -1099,6 +1122,10 @@ function main()
     # The primary profile above is unchanged; this only adds artifacts and
     # verifies the primary outputs stayed byte-stable (1147 -> 941).
     write_parity_artifacts(RAW_PATH, RESULTS_DIR, CLEAN_DIR)
+
+    # --- Phase A: water-body separation (additive; strict numbers unchanged) --
+    write_river_outputs(ctx)
+
     strict_regression(RESULTS_DIR; rows_in = nrow(raw), rows_out = nrow(df))
     println("\nRun id: ", run_id, "  — report evidence under results/runs/",
             run_id, "/")

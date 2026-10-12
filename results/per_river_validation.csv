@@ -1,0 +1,8 @@
+check,expected,actual,status
+Per-river rows sum to the combined rows,941,941,PASS
+record_id unique across all records,all unique,941 / 941,PASS
+One water_body per record_id,1,1,PASS
+No station name shared across water bodies,0,0,PASS
+Per-river frames reproduce the combined dataset,identical,identical,PASS
+Parity observed cells equal the raw sheet,0,0,PASS
+Parity rows sum to the combined parity file,1009,1009,PASS
