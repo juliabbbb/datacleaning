@@ -1,7 +1,7 @@
-﻿# MMORS Water Quality 2012–2018 — Data Cleaning Pipeline
+# MMORS Water Quality 2012–2018 — Data Cleaning Pipeline
 
-Reproducible, Julia-only preprocessing of the Marilaoâ€“Meycauayanâ€“Obando
-River System (MMORS) water-quality monitoring results (2012â€“2018).
+Reproducible, Julia-only preprocessing of the Marilao–Meycauayan–Obando
+River System (MMORS) water-quality monitoring results (2012–2018).
 
 All cleaning, transformation, validation, logging and figure generation is
 done with Julia (`XLSX`, `DataFrames`, `CSV`, `Statistics`, `StatsBase`,
@@ -19,10 +19,10 @@ script is portable.
 
 ## Input
 
-`data/raw/MMORS_water_quality_results_2012-2018_orig.xlsx` â€” 4 sheets:
+`data/raw/MMORS_water_quality_results_2012-2018_orig.xlsx` — 4 sheets:
 
-- `Table1 (3)` â€¦ single-cell external-data stub, no observations (excluded)
-- `Marilao`, `Meycauayan`, `Obando` â€¦ data partitions (same schema)
+- `Table1 (3)` … single-cell external-data stub, no observations (excluded)
+- `Marilao`, `Meycauayan`, `Obando` … data partitions (same schema)
 
 The sheets are not rectangular: agency banners, WQG guideline rows and
 interleaved `CY YYYY MONTH` period labels were interleaved with the station
@@ -38,7 +38,7 @@ records. Extraction is positional against the inspected fixed layout.
 | 4 | Invalid-entry assessment | Strings in typed columns, pH range, negatives, coordinate domain |
 | 5 | Remove unnecessary records | Normalized-key deduplication; drop 175 zero-measurement rows |
 | 6 | Correct types & formats | Parse Date/Time/Float64; repair malformed cells; censored `<x`/`>x` kept as threshold + flags (Decision A) |
-| 7 | Handle missing values | Recover year/month from `CY` labels; station+year median imputation only where coverage â‰¥50% per station-year, flagged (Decision B); era-blocked gaps kept missing |
+| 7 | Handle missing values | Recover year/month from `CY` labels; station+year median imputation only where coverage ≥50% per station-year, flagged (Decision B); era-blocked gaps kept missing |
 | 8 | Flag outliers | IQR fences + z-score cross-check; values kept, flagged in `outlier_params` |
 | 9 | Standardize values | Collapse inconsistent whitespace in station names / period labels |
 | 10 | Transform variables | Rename to snake_case, add derived `year`/`month`/`date_source` |
@@ -47,27 +47,27 @@ records. Extraction is positional against the inspected fixed layout.
 
 ## Outputs
 
-- `data/clean/mmors_water_quality_clean.csv` â€” analysis-ready dataset
-  (941 rows Ã— 28 columns)
-- `results/step_log.csv` â€” before/after count of every cleaning step
-- `results/decision_log.csv` â€” problem â†’ technique â†’ Julia function â†’
-  reason â†’ count (basis for the report's Â§3.3)
-- `results/before_after.csv` â€” summary table for the report
+- `data/clean/mmors_water_quality_clean.csv` — analysis-ready dataset
+  (941 rows × 28 columns)
+- `results/step_log.csv` — before/after count of every cleaning step
+- `results/decision_log.csv` — problem → technique → Julia function →
+  reason → count (basis for the report's §3.3)
+- `results/before_after.csv` — summary table for the report
 - `results/missing_before.csv`, `results/missing_after.csv`,
-  `results/outliers.csv` â€” detail tables
-- `results/environment.txt` â€” Julia + package versions (reproducibility)
-- `figures/` â€” missing-values, record-count flow, outlier boxplots,
+  `results/outliers.csv` — detail tables
+- `results/environment.txt` — Julia + package versions (reproducibility)
+- `figures/` — missing-values, record-count flow, outlier boxplots,
   and before/after distribution charts
 
 ## Key decisions
 
-- **Censored values** (Decision A): `<0.048`, `>16000000` â€¦ parsed to the
+- **Censored values** (Decision A): `<0.048`, `>16000000` … parsed to the
   threshold number and flagged in `below_dl` / `above_range`. Information is
   preserved, rows stay analyzable.
 - **Missing values** (Decision B): only scattered gaps inside measured
-  station-years are filled (station-year median, coverage â‰¥50%) and each fill
+  station-years are filled (station-year median, coverage ≥50%) and each fill
   is recorded in `imputed_params`. Era-blocked gaps (2012 pH, campaign-only
-  temperature/color, etc.) are kept missing â€” filling them would fabricate
+  temperature/color, etc.) are kept missing — filling them would fabricate
   measurements that were never taken.
 - **Outliers** are flagged, never removed or capped: anoxic DO and estuarine
   chlorides are typically real events.
@@ -86,11 +86,11 @@ figures/         report charts
 ## Report app
 
 `src/ui/` is a Bonito 5 app that re-reads the evidence layer
-(`results/`, `figures/`, `results/runs/`) into seven screens â€” DATASET,
-QUALITY, CLEANING, BEFORE/AFTER, VALIDATION, FINAL, REPORT â€” with a
+(`results/`, `figures/`, `results/runs/`) into seven screens — DATASET,
+QUALITY, CLEANING, BEFORE/AFTER, VALIDATION, FINAL, REPORT — with a
 run-history diff drawer and a freshness badge (`CURRENT`/`STALE`/`NO RUN`).
 
-- Live server: `julia --project=. -e 'include("src/ui/BrutalUI.jl"); BrutalUI.run_server()'` â†’ http://127.0.0.1:8080
+- Live server: `julia --project=. -e 'include("src/ui/BrutalUI.jl"); BrutalUI.run_server()'` → http://127.0.0.1:8080
 - Offline single-file export (self-contained; figures embedded as data URIs):
 
 ```julia
