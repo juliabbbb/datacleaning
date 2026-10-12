@@ -993,6 +993,7 @@ end
 include(joinpath(@__DIR__, "ui", "tokens.jl"))
 include(joinpath(@__DIR__, "ui", "theme_makie.jl"))
 include(joinpath(@__DIR__, "report_figures.jl"))
+include(joinpath(@__DIR__, "parity.jl"))          # :paper_parity profile + regression
 include(joinpath(@__DIR__, "report_artifacts.jl"))
 
 # =============================================================================
@@ -1093,6 +1094,12 @@ function main()
            after = after, snap = snap)
     make_report_figures(ctx)
     write_report_artifacts(ctx)
+
+    # --- second profile (:paper_parity) + strict-run regression ---------------
+    # The primary profile above is unchanged; this only adds artifacts and
+    # verifies the primary outputs stayed byte-stable (1147 -> 941).
+    write_parity_artifacts(RAW_PATH, RESULTS_DIR, CLEAN_DIR, df)
+    strict_regression(RESULTS_DIR; rows_in = nrow(raw), rows_out = nrow(df))
     println("\nRun id: ", run_id, "  — report evidence under results/runs/",
             run_id, "/")
 

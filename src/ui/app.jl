@@ -17,7 +17,7 @@ end
 function run_server(port::Integer = 8080)
     server = Server(build_app(), "127.0.0.1", port)
     @info "REPORT app running at http://127.0.0.1:$(port)"
-    return server
+    return wait(server)
 end
 
 "Single self-contained HTML (images + evidence embedded as data URIs)."

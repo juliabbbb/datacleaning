@@ -1,0 +1,102 @@
+parameter,metric,paper_value,our_value,delta,status,note
+_row_set,blocks_in_window,77,76,-1.0,INFO,banner range CY 2012 JANUARY..CY 2018 MAY = 88 blocks / 440 rows (NOT 385); fell back to the data window blocks 1..76 = 76 blocks / 380 rows; dropped blocks 77..95 are all zero-data (EDGE drop)
+dissolved_oxygen_mg_l,n_nonblank,369,369,0.0,PASS,
+dissolved_oxygen_mg_l,min,0.03,0.03,0.0,PASS,
+dissolved_oxygen_mg_l,max,7.48,7.48,0.0,PASS,
+dissolved_oxygen_mg_l,mean,1.996157182,1.9961571815718162,-0.0,PASS,
+dissolved_oxygen_mg_l,median,1.8,1.8,0.0,PASS,
+dissolved_oxygen_mg_l,mode,3.2,3.2,0.0,PASS,first-occurrence tie-break (Excel MODE)
+dissolved_oxygen_mg_l,imputed_value,1.8,1.8,0.0,PASS,median rounded to 2 dp
+dissolved_oxygen_mg_l,mean_after,1.988005,1.9880051948051953,0.0,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+ph,n_nonblank,310,310,0.0,PASS,
+ph,min,6.01,6.01,0.0,PASS,
+ph,max,8.86,8.86,0.0,PASS,
+ph,mean,7.582129032,7.582129032258065,0.0,PASS,
+ph,median,7.685,7.6850000000000005,0.0,PASS,
+ph,mode,8.01,8.01,0.0,PASS,first-occurrence tie-break (Excel MODE)
+ph,imputed_value,7.69,7.69,0.0,PASS,median rounded to 2 dp
+ph,mean_after,7.603143,7.603142857142857,-0.0,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+temperature_c,n_nonblank,75,75,0.0,PASS,
+temperature_c,min,25.95,25.95,0.0,PASS,
+temperature_c,max,35,35.0,0.0,PASS,
+temperature_c,mean,29.96693333,29.966933333333333,0.0,PASS,
+temperature_c,median,29.53,29.53,0.0,PASS,
+temperature_c,mode,31.5,31.5,0.0,PASS,first-occurrence tie-break (Excel MODE)
+temperature_c,imputed_value,29.53,29.53,0.0,PASS,median rounded to 2 dp
+temperature_c,mean_after,29.61512,29.615116883116887,-3.0e-6,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+bod_mg_l,n_nonblank,365,365,0.0,PASS,
+bod_mg_l,min,2,2.0,0.0,PASS,
+bod_mg_l,max,289,289.0,0.0,PASS,
+bod_mg_l,mean,34.61643836,34.61643835616438,-0.0,PASS,
+bod_mg_l,median,24,24.0,0.0,PASS,
+bod_mg_l,mode,23,23.0,0.0,PASS,first-occurrence tie-break (Excel MODE)
+bod_mg_l,imputed_value,24.0,24.0,0.0,PASS,median rounded to 2 dp
+bod_mg_l,mean_after,34.06494,34.064935064935064,-5.0e-6,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+tss_mg_l,n_nonblank,309,309,0.0,PASS,
+tss_mg_l,min,3,3.0,0.0,PASS,
+tss_mg_l,max,330,330.0,0.0,PASS,
+tss_mg_l,mean,23.6407767,23.640776699029125,-0.0,PASS,
+tss_mg_l,median,17,17.0,0.0,PASS,
+tss_mg_l,mode,12,12.0,0.0,PASS,first-occurrence tie-break (Excel MODE)
+tss_mg_l,imputed_value,17.0,17.0,0.0,PASS,median rounded to 2 dp
+tss_mg_l,mean_after,22.32987,22.32987012987013,0.0,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+color_tcu,n_nonblank,70,70,0.0,PASS,
+color_tcu,min,10,10.0,0.0,PASS,
+color_tcu,max,250,250.0,0.0,PASS,
+color_tcu,mean,58.35714286,58.357142857142854,-0.0,PASS,
+color_tcu,median,40,40.0,0.0,PASS,
+color_tcu,mode,40,40.0,0.0,PASS,first-occurrence tie-break (Excel MODE)
+color_tcu,imputed_value,40.0,40.0,0.0,PASS,color = mode
+color_tcu,mean_after,43.33766,43.33766233766234,2.0e-6,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+fecal_coliform_mpn,n_nonblank,95,95,0.0,PASS,
+fecal_coliform_mpn,min,54000,54000.0,0.0,PASS,
+fecal_coliform_mpn,max,160000000,1.6e8,0.0,PASS,
+fecal_coliform_mpn,mean,8.905305263e6,8.905305263157895e6,0.000158,PASS,
+fecal_coliform_mpn,median,2800000,2.8e6,0.0,PASS,
+fecal_coliform_mpn,mode,3500000,3.5e6,0.0,PASS,first-occurrence tie-break (Excel MODE)
+fecal_coliform_mpn,imputed_value,2.8e6,2.8e6,0.0,PASS,median rounded to 2 dp
+fecal_coliform_mpn,mean_after,4.306503896e6,4.306503896103896e6,0.000104,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+total_coliform_mpn,n_nonblank,215,215,0.0,PASS,
+total_coliform_mpn,min,120,120.0,0.0,PASS,
+total_coliform_mpn,max,700000000,7.0e8,0.0,PASS,
+total_coliform_mpn,mean,1.626927033e7,1.6336247069767442e7,66976.739767,FAIL,mean mismatch
+total_coliform_mpn,median,3500000,3.5e6,0.0,PASS,
+total_coliform_mpn,mode,3500000,3.5e6,0.0,PASS,first-occurrence tie-break (Excel MODE)
+total_coliform_mpn,imputed_value,3.5e6,3.5e6,0.0,PASS,median rounded to 2 dp
+total_coliform_mpn,mean_after,1.063089122e7,1.0668293818181818e7,37402.598182,FAIL,diverges from the paper (see Table 1 / imputed_value)
+ammonia_mg_l,n_nonblank,220,220,0.0,PASS,
+ammonia_mg_l,min,1.319,1.319,0.0,PASS,
+ammonia_mg_l,max,124,124.0,0.0,PASS,
+ammonia_mg_l,mean,19.97677727,19.976777272727276,0.0,PASS,
+ammonia_mg_l,median,18.784,18.784,0.0,PASS,
+ammonia_mg_l,mode,3.079,3.079,0.0,PASS,first-occurrence tie-break (Excel MODE)
+ammonia_mg_l,imputed_value,18.78,18.78,0.0,PASS,median rounded to 2 dp
+ammonia_mg_l,mean_after,19.46387,19.46387272727273,3.0e-6,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+nitrates_mg_l,n_nonblank,310,310,0.0,PASS,
+nitrates_mg_l,min,0.005,0.005,0.0,PASS,
+nitrates_mg_l,max,2.037,2.037,0.0,PASS,
+nitrates_mg_l,mean,0.441890323,0.3582903225806452,-0.0836,FAIL,mean mismatch
+nitrates_mg_l,median,0.328,0.1595,-0.1685,FAIL,median mismatch
+nitrates_mg_l,mode,0.48,0.048,-0.432,FAIL,paper mode not reproduced
+nitrates_mg_l,imputed_value,0.33,0.16,-0.17,FAIL,median rounded to 2 dp
+nitrates_mg_l,mean_after,0.420094,0.3196623376623377,-0.100432,FAIL,diverges from the paper (see Table 1 / imputed_value)
+phosphates_mg_l,n_nonblank,310,310,0.0,PASS,
+phosphates_mg_l,min,0.113,0.113,0.0,PASS,
+phosphates_mg_l,max,30.894,30.894,0.0,PASS,
+phosphates_mg_l,mean,2.804983871,2.8049838709677415,-0.0,PASS,
+phosphates_mg_l,median,2.5415,2.5415,0.0,PASS,
+phosphates_mg_l,mode,0.573,0.573,0.0,PASS,first-occurrence tie-break (Excel MODE)
+phosphates_mg_l,imputed_value,2.54,2.54,0.0,PASS,median rounded to 2 dp
+phosphates_mg_l,mean_after,2.753364,2.753363636363636,-0.0,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+chlorides_mg_l,n_nonblank,90,90,0.0,PASS,
+chlorides_mg_l,min,1.073,1.073,0.0,PASS,
+chlorides_mg_l,max,1152,1152.0,0.0,PASS,
+chlorides_mg_l,mean,190.2607,190.26069999999999,-0.0,PASS,
+chlorides_mg_l,median,60.5,60.5,0.0,PASS,
+chlorides_mg_l,mode,30,30.0,0.0,PASS,first-occurrence tie-break (Excel MODE)
+chlorides_mg_l,imputed_value,60.5,60.5,0.0,PASS,median rounded to 2 dp
+chlorides_mg_l,mean_after,90.83367,90.83367012987014,0.0,PASS,paper closed form (n*mean+(385-n)*imputed)/385
+nitrates_mg_l,censored_cells,missing,60,,FAIL,"paper's nitrates are consistent with 0.48 (10x our 0.048, 60 cells); likely retyping in the adviser's sheet, to be confirmed with the adviser."
+total_coliform_mpn,censored_cells,missing,1,,FAIL,"paper's total coliform is consistent with 1,600,000 (10x our 16,000,000, 1 cell); likely retyping in the adviser's sheet, to be confirmed with the adviser."
+date,n_nonblank,370,320,-50.0,INFO,paper derives dates from the CY banner; our window keeps 10 date/time-only rows
+time,n_nonblank,310,320,10.0,INFO,10 date/time-only rows carry a time but no parameter

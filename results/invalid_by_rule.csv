@@ -1,4 +1,4 @@
-# T9 Invalid entries by rule - paper section 4.2  |  run run_20261008_091605
+# T9 Invalid entries by rule - paper section 4.2  |  run run_20261012_160011
 rule,column,flagged,action,examples
 censored value '<x' (below detection limit),"Nitrates as Nitrogen, mg/L",195,threshold kept as the value + below_dl flag (Decision A),<0.05; <0.05; <0.048*; <0.048*; <0.048*
 censored value '<x' (below detection limit),"Total Coliform, MPN/100mL",1,threshold kept as the value + below_dl flag (Decision A),<1.8

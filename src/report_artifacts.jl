@@ -660,6 +660,7 @@ function write_report_artifacts(ctx)
     # T15 - descriptives before vs after (section 4.3)
     # -------------------------------------------------------------------------
     r3(x) = round(x; digits = 3)
+    mode_of(v) = isempty(v) ? missing : r3(mode_firstocc(v))
     rows = NamedTuple[]
     for p in PARAM_KEY
         b = snap.num[p]
@@ -668,9 +669,11 @@ function write_report_artifacts(ctx)
                      n_before = length(b), mean_before = r3(mean(b)),
                      median_before = r3(median(b)), sd_before = r3(std(b)),
                      min_before = r3(minimum(b)), max_before = r3(maximum(b)),
+                     mode_before = mode_of(b),
                      n_after = length(a), mean_after = r3(mean(a)),
                      median_after = r3(median(a)), sd_after = r3(std(a)),
-                     min_after = r3(minimum(a)), max_after = r3(maximum(a))))
+                     min_after = r3(minimum(a)), max_after = r3(maximum(a)),
+                     mode_after = mode_of(a)))
     end
     w("descriptives_before_after.csv",
       "T15 Descriptive statistics before vs after - paper section 4.3",

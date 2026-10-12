@@ -1,4 +1,4 @@
-# T4 Preprocessing procedure summary - paper section 3.3  |  run run_20261008_091605
+# T4 Preprocessing procedure summary - paper section 3.3  |  run run_20261012_160011
 problem,technique,func,reason,count
 Workbook contains a non-data stub tab,Exclude sheet from processing,stage1_load_and_inspect,"Tab holds only an Excel external-data name, no records",1
 "Inconsistent column headers across sheets (e.g. ""Temperature °C*"" vs ""Temperature °C"")",Positional canonical header mapping,stage1_load_and_inspect,"Sheets are partitions of one schema; positions are identical, only labels differ",2

@@ -1,4 +1,4 @@
-# Report Evidence: figure index  |  run run_20261008_091605
+# Report Evidence: figure index  |  run run_20261012_160011
 figure,file,title,paper_section,alt,status,note
 F1,fig01,Pipeline workflow (7 stages),3.3,Block diagram of the seven preprocessing stages with record counts at each step.,READY,
 F2,fig02,"Missing values per column, raw",4.1,"Horizontal bars of the share of records missing or placeholder text in each raw column, sorted worst first.",READY,
