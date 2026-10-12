@@ -1,4 +1,4 @@
-# T18 Row-count reconciliation - paper sections 3.3/9 and 4.3  |  run run_20261012_161625
+# T18 Row-count reconciliation - paper sections 3.3/9 and 4.3  |  run run_20261012_173913
 scope,step,rows,cumulative
 ALL WORKSHEETS,input: records extracted,1147,1147
 ALL WORKSHEETS,removed: duplicate records,-31,1116

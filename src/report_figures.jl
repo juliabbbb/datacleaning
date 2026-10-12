@@ -342,7 +342,8 @@ function fig08_boxplots(fd)
              strokecolor = col(INK), whiskerwidth = 0.6)
     scatter!(ax, fx, fy; color = col(LAVENDER), strokewidth = 1.5,
              strokecolor = col(INK), markersize = 11)
-    text!(ax, string(length(fx), " IQR-flagged values (lavender), all kept");
+    text!(ax, string(length(fx), " IQR-flagged values (lavender), all kept",
+                     " — pooled fences (see results/outliers_per_river.csv)");
           position = (0.01, 0.99), space = :relative, align = (:left, :top),
           fontsize = 14, font = :bold)
     fig
@@ -642,8 +643,8 @@ function make_report_figures(ctx)
           inv = inv, snap = snap, r5 = r5, types6 = types6, after = after,
           n_filled = n_filled, n_out = n_out, n_std = n_std,
           n_exact = n_exact, n_key = n_key,
-          n_raw_rows = nrow(raw), n_raw_cols = ncol(raw),
-          n_rows = nrow(df), n_cols = ncol(df),
+          n_raw_rows = nrow(raw), n_raw_cols = n_analysis(raw),
+          n_rows = nrow(df), n_cols = n_analysis(df),
           ancols = [c for c in names(df) if !(c in FLAG)],
           bmiss = Dict(r.column => r for r in eachrow(miss_before)),
           amiss = Dict(c => count(ismissing, df[!, c]) for c in names(df)),
@@ -689,7 +690,7 @@ function make_report_figures(ctx)
           "Stacked bars of correct versus incorrect typed columns before and after the type conversion stage.",
           () -> fig07_types(fd))
     build("F8", "fig08", "Outliers per key parameter", "4.1",
-          "Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept.",
+          "Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept. Uses the pooled fences of the primary profile; per-water-body fences are in results/outliers_per_river.csv.",
           () -> fig08_boxplots(fd))
     build("F9", "fig09", "Distributions before vs after", "4.3",
           "Paired histograms of eight key parameters, raw in amber and cleaned in mint, log10 axis when skewed.",

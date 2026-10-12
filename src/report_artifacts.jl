@@ -133,7 +133,7 @@ function raw_snapshot(raw::DataFrame)
 
     # duplicates per worksheet (T8) ------------------------------------------
     dkeys = dup_keys(raw)
-    exact = nonunique(raw)
+    exact = exact_dup_mask(raw)
     seen = Dict{String, Int}()
     per = Dict(s => Dict("exact" => 0, "key" => 0) for s in STATION_SHEETS)
     for i in 1:n
@@ -179,10 +179,11 @@ end
 # =============================================================================
 # WRITE_REPORT_ARTIFACTS
 # =============================================================================
-const EXPECTED_COLS = ["period_label", "water_body", "station_no", "station",
-                       "latitude", "longitude", "date", "time", "year", "month",
-                       "date_source", PARAM_KEY..., "below_dl", "above_range",
-                       "parse_issues", "imputed_params", "outlier_params"]
+const EXPECTED_COLS = ["water_body", "record_id", "period_label", "station_no",
+                       "station", "latitude", "longitude", "date", "time",
+                       "year", "month", "date_source", PARAM_KEY...,
+                       "below_dl", "above_range", "parse_issues",
+                       "imputed_params", "outlier_params"]
 
 # =============================================================================
 # T17 - data quality scorecard. One function for the table and for figure F13,
@@ -194,8 +195,8 @@ function scorecard_table(ctx)
     typed_f = ["date", "time", PARAM_KEY...]
     n_raw_rows = nrow(raw)
     n_rows = nrow(df)
-    n_raw_cols = ncol(raw)
-    n_cols = ncol(df)
+    n_raw_cols = n_analysis(raw)      # excludes the provenance key record_id
+    n_cols = n_analysis(df)
     miss_b = sum(miss_before.total_missing)
     miss_a = after.n_missing
     cells_b = n_raw_rows * n_raw_cols
@@ -258,6 +259,8 @@ function write_report_artifacts(ctx)
     typed_f = ["date", "time", PARAM_KEY...]
     n_raw_rows, n_raw_cols = size(raw)
     n_rows, n_cols = size(df)
+    n_raw_cols = n_analysis(raw)      # excludes the provenance key record_id
+    n_cols = n_analysis(df)
     miss_b = sum(miss_before.total_missing)                 # 7499
     miss_a = after.n_missing                                # 4519
     cells_b = n_raw_rows * n_raw_cols
@@ -326,7 +329,8 @@ function write_report_artifacts(ctx)
     # T3 - variable dictionary (sections 3.1, 4.2)
     # -------------------------------------------------------------------------
     UNITS = Dict(
-        "period_label" => "-", "water_body" => "name", "station_no" => "code",
+        "water_body" => "name", "record_id" => "id",
+        "period_label" => "-", "station_no" => "code",
         "station" => "name", "latitude" => "degree", "longitude" => "degree",
         "date" => "date", "time" => "time", "year" => "year",
         "month" => "month", "date_source" => "source",
@@ -338,8 +342,9 @@ function write_report_artifacts(ctx)
         "below_dl" => "flag", "above_range" => "flag", "parse_issues" => "log",
         "imputed_params" => "flag", "outlier_params" => "flag")
     DESCR = Dict(
-        "period_label" => "'CY YYYY MONTH' label of the worksheet block the record sits in",
         "water_body" => "partition worksheet the record came from (Marilao / Meycauayan / Obando)",
+        "record_id" => "provenance id: worksheet name plus the 1-based worksheet row of the record",
+        "period_label" => "'CY YYYY MONTH' label of the worksheet block the record sits in",
         "station_no" => "agency station code",
         "station" => "station name, whitespace-normalized in Stage 9",
         "latitude" => "north latitude of the station",
@@ -383,8 +388,9 @@ function write_report_artifacts(ctx)
                      missing_before = br === nothing ? missing : br.missing,
                      missing_after = count(ismissing, df[!, c]),
                      status = c == "water_body" ? "kept as-is" :
-                              (derived ? "derived (Stages 6-7)" :
-                               "kept, renamed (Stage 10)"),
+                              (c == "record_id" ? "derived (Stage 1)" :
+                               (derived ? "derived (Stages 6-7)" :
+                                "kept, renamed (Stage 10)")),
                      description = get(DESCR, c, "-")))
     end
     w("variable_dictionary.csv",
@@ -458,7 +464,7 @@ function write_report_artifacts(ctx)
     # -------------------------------------------------------------------------
     # T6 - missing values per column, before/after + treatment (section 4.2)
     # -------------------------------------------------------------------------
-    imp = zeros(Int, n_cols)
+    imp = zeros(Int, ncol(df))        # one slot per actual column (incl. record_id)
     for v in df.imputed_params
         isempty(v) && continue
         for k in split(v, ";")
@@ -628,6 +634,9 @@ function write_report_artifacts(ctx)
                      rule = string(old, "  ->  ", new, " (snake_case)"),
                      rows_affected = n_raw_rows))
     end
+    push!(rows, (variable = "record_id", action = "derived",
+                 rule = "string(water_body, \"-\", worksheet row) - provenance id",
+                 rows_affected = n_rows))
     push!(rows, (variable = "year", action = "derived",
                  rule = "Dates.year(date), else year of the 'CY YYYY ...' label",
                  rows_affected = count(!ismissing, df.year)))
@@ -749,9 +758,9 @@ function write_report_artifacts(ctx)
     ck("Row conservation: input - removals = output",
        n_raw_rows - r5.n_dupe - r5.n_empty, n_rows,
        n_raw_rows - r5.n_dupe - r5.n_empty == n_rows)
-    ck("Column names unique", n_cols, length(unique(names(df))),
+    ck("Column names unique", ncol(df), length(unique(names(df))),
        allunique(names(df)))
-    ck("Schema matches the expected 28 columns",
+    ck("Schema matches the expected $(length(EXPECTED_COLS)) columns",
        join(EXPECTED_COLS, ","), join(names(df), ","),
        names(df) == EXPECTED_COLS)
     ck("pH within 0-14", "0..14",
@@ -793,7 +802,7 @@ function write_report_artifacts(ctx)
     ok_file = isfile(clean_path)
     if ok_file
         reloaded = CSV.read(clean_path, DataFrame)
-        ck("Clean CSV reloads with the same shape", string(n_rows, "x", n_cols),
+        ck("Clean CSV reloads with the same shape", string(n_rows, "x", ncol(df)),
            string(nrow(reloaded), "x", ncol(reloaded)),
            size(reloaded) == size(df))
     else
@@ -850,6 +859,15 @@ function write_report_artifacts(ctx)
                     "`outlier_params`. Extreme ambient values (anoxic DO, ",
                     "estuarine chlorides) are frequently real events; no ",
                     "domain-specific water-quality threshold was applied.")),
+            ("Outlier fences are pooled in the primary profile",
+             string("- The combined file's `outlier_params` uses IQR fences ",
+                    "pooled across all three water bodies (primary profile). ",
+                    "Per-water-body fences are provided additively in ",
+                    "`outliers_per_river.csv` and the `outlier_params_river` ",
+                    "column of each per-river CSV; `outliers_fence_compare.csv` ",
+                    "lists the flagged-cell difference per parameter. Values ",
+                    "are kept in both, and `fence_method` labels every outlier ",
+                    "table.")),
             ("Paper retained its outliers",
              string("- The reference paper does NOT remove or cap its ",
                     "outliers, and neither do we (IQR flagging only, values ",

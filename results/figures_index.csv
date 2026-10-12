@@ -1,4 +1,4 @@
-# Report Evidence: figure index  |  run run_20261012_161625
+# Report Evidence: figure index  |  run run_20261012_173913
 figure,file,title,paper_section,alt,status,note
 F1,fig01,Pipeline workflow (7 stages),3.3,Block diagram of the seven preprocessing stages with record counts at each step.,READY,
 F2,fig02,"Missing values per column, raw",4.1,"Horizontal bars of the share of records missing or placeholder text in each raw column, sorted worst first.",READY,
@@ -7,7 +7,7 @@ F4,fig04,Missingness pattern (rows x columns),4.1,Heatmap of missing share per r
 F5,fig05,Record flow raw to final,4.2,"Waterfall from extracted records to the analysis-ready dataset, one bar per removal reason.",READY,
 F6,fig06,Invalid entries by rule,4.1,Horizontal bars counting cells flagged by each validity rule in the raw table.,READY,
 F7,fig07,Data types before vs after,4.2,Stacked bars of correct versus incorrect typed columns before and after the type conversion stage.,READY,
-F8,fig08,Outliers per key parameter,4.1,Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept.,READY,
+F8,fig08,Outliers per key parameter,4.1,Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept. Uses the pooled fences of the primary profile; per-water-body fences are in results/outliers_per_river.csv.,READY,
 F9,fig09,Distributions before vs after,4.3,"Paired histograms of eight key parameters, raw in amber and cleaned in mint, log10 axis when skewed.",READY,
 F10,fig10,Central tendency by year with spread,4.3,"Yearly median line with interquartile band for dissolved oxygen, raw records versus cleaned records.",READY,
 F11,fig11,Records by year,4.3,Grouped bars of record counts per year before and after cleaning.,READY,

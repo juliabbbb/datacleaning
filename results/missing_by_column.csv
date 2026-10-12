@@ -1,7 +1,8 @@
-# T6 Missing values per column - paper section 4.2  |  run run_20261012_161625
+# T6 Missing values per column - paper section 4.2  |  run run_20261012_173913
 column,missing_before,placeholder_before,total_missing_before,pct_before,missing_after,pct_after,imputed_cells,treatment
-period_label,,,,,0,0.0,0,-
 water_body,,,,,0,0.0,0,-
+record_id,,,,,0,0.0,0,-
+period_label,,,,,0,0.0,0,-
 station_no,,,,,0,0.0,0,-
 station,,,,,0,0.0,0,-
 latitude,,,,,0,0.0,0,-

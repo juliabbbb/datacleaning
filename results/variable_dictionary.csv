@@ -1,7 +1,8 @@
-# T3 Variable dictionary - paper sections 3.1 and 4.2  |  run run_20261012_161625
+# T3 Variable dictionary - paper sections 3.1 and 4.2  |  run run_20261012_173913
 variable,unit,type_before,type_after,missing_before,missing_after,status,description
-period_label,-,String,String,,0,"kept, renamed (Stage 10)",'CY YYYY MONTH' label of the worksheet block the record sits in
 water_body,name,String,String,,0,kept as-is,partition worksheet the record came from (Marilao / Meycauayan / Obando)
+record_id,id,String,String,,0,derived (Stage 1),provenance id: worksheet name plus the 1-based worksheet row of the record
+period_label,-,String,String,,0,"kept, renamed (Stage 10)",'CY YYYY MONTH' label of the worksheet block the record sits in
 station_no,code,Int64,Int64,,0,"kept, renamed (Stage 10)",agency station code
 station,name,String,Any,,0,"kept, renamed (Stage 10)","station name, whitespace-normalized in Stage 9"
 latitude,degree,Float64,Float64,,0,"kept, renamed (Stage 10)",north latitude of the station

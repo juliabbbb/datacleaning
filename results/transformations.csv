@@ -1,4 +1,4 @@
-# T14 Transformations - paper section 4.2  |  run run_20261012_161625
+# T14 Transformations - paper section 4.2  |  run run_20261012_173913
 variable,action,rule,rows_affected
 ammonia_mg_l,renamed,"Ammonia, mg/L  ->  ammonia_mg_l (snake_case)",1147
 bod_mg_l,renamed,"Biochemical Oxygen Demand, mg/L  ->  bod_mg_l (snake_case)",1147
@@ -19,6 +19,7 @@ time,renamed,Time  ->  time (snake_case),1147
 total_coliform_mpn,renamed,"Total Coliform, MPN/100mL  ->  total_coliform_mpn (snake_case)",1147
 tss_mg_l,renamed,"Total Suspended Solids, mg/L  ->  tss_mg_l (snake_case)",1147
 period_label,renamed,period  ->  period_label (snake_case),1147
+record_id,derived,"string(water_body, ""-"", worksheet row) - provenance id",941
 year,derived,"Dates.year(date), else year of the 'CY YYYY ...' label",941
 month,derived,"Dates.month(date), else month name of the period label",941
 date_source,derived,'date' | 'period_label' | 'unknown',941
