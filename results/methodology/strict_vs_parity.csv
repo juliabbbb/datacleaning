@@ -1,0 +1,15 @@
+# M9 strict (primary) vs :paper_parity profile  |  sources run_manifest.json + data/clean/*.csv + results/paper_vs_ours.csv  |  run run_20261012_171122
+property,strict_profile,parity_profile,note
+profile,primary strict pipeline (Stages 1-12),":paper_parity (alternative, non-destructive)",parity profile reproduces the paper's method; strict stays the analysis-ready output
+rows (total),941,1009,parity keeps every windowed sheet row; strict removes duplicates and empty records
+rows (Marilao),370,385,parity window = data blocks + trailing coordinate-only block
+rows (Meycauayan),370,390,parity window = data blocks + trailing coordinate-only block
+rows (Obando),201,234,parity window = data blocks + trailing coordinate-only block
+columns,29,30,strict = 3 ids + 9 metadata/derived + 12 parameters + 5 flag/doc columns; parity = 6 ids/fields + 12 parameters + 12 <param>_imputed flags
+duplicate records removed,31,0,parity keeps all rows
+zero-measurement rows removed,175,0,parity keeps all rows
+imputed cells,116,5137,"strict: station-year median, coverage >= 50%, flagged; parity: full-completeness median (Mode for Color), every cell flagged"
+observed values altered,no,no,both profiles never change an observed value
+outlier policy,"IQR flag only, values kept",not flagged,reference paper also retains its outliers
+purpose,analysis-ready dataset for the report,faithful reproduction + verification of the paper,"parity exists to check, not replace, the primary output"
+verification,strict_regression.csv 35/35 PASS,paper_vs_ours.csv 101 PASS,strict byte-stable; parity matches the paper's Tables 1-2 on 11/12 parameters

@@ -1,0 +1,6 @@
+# M7 record flow: records extracted -> duplicates/zero-measurement removals -> analysis-ready  |  source results/reconciliation.csv  |  run run_20261012_171122
+step,rows,cumulative,pct_of_extracted
+input: records extracted,1147,1147,100.0%
+removed: duplicate records,-31,1116,-2.7%
+removed: zero-measurement records,-175,941,-15.3%
+output: analysis-ready records,941,941,82.0%
