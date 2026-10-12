@@ -1,0 +1,18 @@
+column,target_type,type_before,text_cells_before,parse_failures,action
+date,Date,"Date, String",5,0,cast to Date
+time,Time,"String, Time",11,0,cast to Time
+station_no,Int64,Int64,0,0,cast to Int64
+latitude,Float64,Float64,0,0,cast to Float64
+longitude,Float64,Float64,0,0,cast to Float64
+dissolved_oxygen_mg_l,Float64,"Float64, Int64, String",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+ph,Float64,"Float64, Int64",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+temperature_c,Float64,"Float64, Int64",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+bod_mg_l,Float64,"Float64, Int64, String",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+tss_mg_l,Float64,"Float64, Int64, String",1,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+color_tcu,Float64,"Float64, Int64",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+fecal_coliform_mpn,Float64,"Float64, Int64, String",1,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+total_coliform_mpn,Float64,"Float64, Int64, String",17,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+ammonia_mg_l,Float64,"Float64, Int64, String",1,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+nitrates_mg_l,Float64,"Float64, String",195,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+phosphates_mg_l,Float64,"Float64, Int64, String",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast
+chlorides_mg_l,Float64,"Float64, Int64",0,0,censored '<x'/'>x' to threshold + flags; else numeric cast

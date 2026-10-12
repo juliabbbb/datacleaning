@@ -1,0 +1,9 @@
+# T20 Coverage: records per year — paper section 4.3  |  run run_20261008_020229
+year,records_before,records_after,removed
+2012,156,156,0
+2013,156,153,3
+2014,151,151,0
+2015,156,135,21
+2016,161,148,13
+2017,161,143,18
+2018,206,55,151

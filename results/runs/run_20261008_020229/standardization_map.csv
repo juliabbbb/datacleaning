@@ -1,0 +1,5 @@
+# T11 Standardization map — paper section 4.2  |  run run_20261008_020229
+column,variants_before,variants_after,rows_changed,rule
+station,19,13,1147,collapse repeated whitespace + strip
+period_label,85,75,0,collapse repeated whitespace + strip
+water_body,3,3,0,"canonical worksheet name, no change"

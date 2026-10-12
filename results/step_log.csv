@@ -1,0 +1,34 @@
+stage,metric,before,after,note
+1_load,raw_cells_Marilao,0,32835,sheet dimension A1:AG995
+1_load,raw_cells_Meycauayan,0,26000,sheet dimension A1:Z1000
+1_load,raw_cells_Obando,0,26000,sheet dimension A1:Z1000
+1_load,records_extracted,0,1147,"station-code rows from 3 partition sheets (schema aligned positionally, vcat)"
+1_load,period_label_rows,0,263,'CY YYYY MONTH' rows converted to period context
+1_load,non_record_rows_skipped,0,37,"agency banners, WQG guideline rows, junk 'ColumnN' header, footnotes"
+1_load,stray_cells_outside_schema,0,30,"orphan transposed fragment, Marilao cols S-W rows 435-440; columns never extracted"
+2_missing,missing_cells,0,7473,"true 'missing' cells across all columns, before cleaning"
+2_missing,placeholder_cells,0,26,"'-', '_', 'NO SAMPLING', blank strings, before cleaning"
+3_duplicates,exact_full_row_duplicates,0,30,
+3_duplicates,key_duplicates,0,31,
+4_invalid,string_cells_in_typed_cols,0,231,
+4_invalid,censored_values,0,214,
+4_invalid,pH_out_of_range,0,0,
+4_invalid,negative_concentrations,0,0,
+4_invalid,coordinates_out_of_domain,0,0,
+4_invalid,columns_with_incorrect_types,0,10,
+5_remove,duplicate_records_removed,1147,1116,"30 exact, 1 same-date/time"
+5_remove,records_zero_measurements,1116,941,"station+coordinates only, nothing observed"
+6_types,censored_values_parsed,0,214,Decision A: threshold value kept + below_dl/above_range flag
+6_types,malformed_cells_repaired,231,0,17 reparsed as values; 214 censored kept numerically; rest set to missing
+6_types,unparseable_cells,0,0,"set to missing, listed in parse_issues column"
+6_types,columns_converted_to_target_type,16,0,date/time/lat/lon + 12 params: mixed Any -> typed
+7_missing,records_period_from_label,0,156,"2012 records: date stays missing, year/month derived from CY label"
+7_missing,cells_imputed,0,116,"station-year median, coverage >=50%, flagged in imputed_params"
+7_missing,parameter_cells_missing_after,0,4205,era-blocked / campaign-only gaps kept as missing
+8_outliers,iqr_flagged_cells,0,357,flagged in outlier_params; no values removed or capped
+9_standardize,string_cells_normalized,0,941,multi-space station names and period labels collapsed
+10_transform,columns_renamed,0,19,snake_case
+10_transform,derived_variables,0,3,"year, month, date_source"
+11_validate,missing_cells_after,0,4519,excludes the 5 documentation/flag columns
+11_validate,duplicate_records_after,0,0,all are the 0 unverifiable period conflicts kept by design
+11_validate,rows_with_outlier_flags,0,293,values kept

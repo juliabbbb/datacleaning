@@ -1,0 +1,8 @@
+# T5b ADDITIONAL ISSUES — paper section 4.1  |  run run_20261008_020229
+issue,before,action_taken,after
+Formatting inconsistencies (station / period spacing),1147 rows (1147 cells),regex whitespace collapse + strip (Stage 9),0 variants
+Records with zero measurements,175 records,row removal (Stage 5),0 records
+Cells outside the 18-column schema,30 cells,excluded at extraction (values duplicate main table),0 cells
+Non-data stub worksheet,1 sheet,excluded from processing (Stage 1),0 sheets
+Period-keyed duplicate conflicts (no date to verify),0 records,kept: no timestamp proves which value is right,0 records (kept)
+Records dated only by a 'CY ...' period label,156 records,"year/month derived from the label, date left missing (Stage 7)",156 records

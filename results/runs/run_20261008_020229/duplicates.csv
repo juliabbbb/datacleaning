@@ -1,0 +1,6 @@
+# T8 Duplicate records — paper section 4.2  |  run run_20261008_020229
+scope,water_body,exact_full_rows,key_duplicates,removed
+worksheet,Marilao,30,31,31
+worksheet,Meycauayan,0,0,0
+worksheet,Obando,0,0,0
+combined,ALL WORKSHEETS,30,31,31

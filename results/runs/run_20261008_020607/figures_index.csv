@@ -1,0 +1,18 @@
+# Report Evidence: figure index  |  run run_20261008_020607
+figure,file,title,paper_section,alt,status,note
+F1,fig01,Pipeline workflow (7 stages),3.3,Block diagram of the seven preprocessing stages with record counts at each step.,READY,
+F2,fig02,"Missing values per column, raw",4.1,"Horizontal bars of the share of records missing or placeholder text in each raw column, sorted worst first.",READY,
+F3,fig03,"Missing values per column, before vs after",4.2,Grouped horizontal bars comparing missing share per column before and after cleaning.,READY,
+F4,fig04,Missingness pattern (rows x columns),4.1,Heatmap of missing share per row block and column in the raw table; darker cells mark structured gaps.,READY,
+F5,fig05,Record flow raw to final,4.2,"Waterfall from extracted records to the analysis-ready dataset, one bar per removal reason.",READY,
+F6,fig06,Invalid entries by rule,4.1,Horizontal bars counting cells flagged by each validity rule in the raw table.,READY,
+F7,fig07,Data types before vs after,4.2,Stacked bars of correct versus incorrect typed columns before and after the type conversion stage.,READY,
+F8,fig08,Outliers per key parameter,4.1,Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept.,READY,
+F9,fig09,Distributions before vs after,4.3,"Paired histograms of eight key parameters, raw in amber and cleaned in mint, log10 axis when skewed.",READY,
+F10,fig10,Central tendency by year with spread,4.3,"Yearly median line with interquartile band for dissolved oxygen, raw records versus cleaned records.",READY,
+F11,fig11,Records by year,4.3,Grouped bars of record counts per year before and after cleaning.,READY,
+F12,fig12,Completeness by column,4.3,Dumbbell chart: completeness of each column before cleaning and after cleaning.,READY,
+F13,fig13,Data quality scorecard,4.3,"Paired horizontal bars for the five scorecard dimensions, before and after, in percent.",READY,
+F14,fig14,Standardization effect,4.2,Bars showing distinct station and period text variants before and after whitespace normalization.,READY,
+F15,fig15,Below-detection-limit share per parameter,4.1,Horizontal bars of the share of measured values that were recorded as '<x' and converted to their threshold.,READY,
+F16,fig16,"Correlation among parameters, after cleaning",4.4,Heatmap of pairwise Pearson correlations among the twelve water-quality parameters in the cleaned dataset.,READY,

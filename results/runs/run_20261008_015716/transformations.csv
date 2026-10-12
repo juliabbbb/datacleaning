@@ -1,0 +1,30 @@
+variable,action,rule,rows_affected
+ammonia_mg_l,renamed,"Ammonia, mg/L  ->  ammonia_mg_l (snake_case)",1147
+bod_mg_l,renamed,"Biochemical Oxygen Demand, mg/L  ->  bod_mg_l (snake_case)",1147
+chlorides_mg_l,renamed,Chlorides Cl - (mg/L)  ->  chlorides_mg_l (snake_case),1147
+color_tcu,renamed,Color TCU  ->  color_tcu (snake_case),1147
+date,renamed,Date  ->  date (snake_case),1147
+dissolved_oxygen_mg_l,renamed,"Dissolved Oxygen, mg/L  ->  dissolved_oxygen_mg_l (snake_case)",1147
+fecal_coliform_mpn,renamed,"Fecal Coliform, MPN/100mL  ->  fecal_coliform_mpn (snake_case)",1147
+latitude,renamed,"Latitude, North (degree)  ->  latitude (snake_case)",1147
+longitude,renamed,"Longitude, East (degree)  ->  longitude (snake_case)",1147
+nitrates_mg_l,renamed,"Nitrates as Nitrogen, mg/L  ->  nitrates_mg_l (snake_case)",1147
+ph,renamed,PH  ->  ph (snake_case),1147
+phosphates_mg_l,renamed,"Phosphates as Phosphorous, mg/L  ->  phosphates_mg_l (snake_case)",1147
+station,renamed,Station  ->  station (snake_case),1147
+station_no,renamed,Station No.  ->  station_no (snake_case),1147
+temperature_c,renamed,Temperature °C*  ->  temperature_c (snake_case),1147
+time,renamed,Time  ->  time (snake_case),1147
+total_coliform_mpn,renamed,"Total Coliform, MPN/100mL  ->  total_coliform_mpn (snake_case)",1147
+tss_mg_l,renamed,"Total Suspended Solids, mg/L  ->  tss_mg_l (snake_case)",1147
+period_label,renamed,period  ->  period_label (snake_case),1147
+year,derived,"Dates.year(date), else year of the 'CY YYYY ...' label",941
+month,derived,"Dates.month(date), else month name of the period label",941
+date_source,derived,'date' | 'period_label' | 'unknown',941
+below_dl,derived,semicolon list of parameters read as '<x' (Decision A),196
+above_range,derived,semicolon list of parameters read as '>x' (Decision A),17
+parse_issues,derived,semicolon list of unparsed cells (empty in this run),0
+imputed_params,derived,semicolon list of parameters filled by station-year median (Decision B),66
+outlier_params,derived,semicolon list of parameters outside the IQR fences,293
+16 typed columns,type conversion,mixed Any -> Date / Time / Float64 (details in T10),10537
+19 columns,standardized,whitespace collapse on station and period text (T11),941

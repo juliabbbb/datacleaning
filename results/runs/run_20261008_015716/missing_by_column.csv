@@ -1,0 +1,29 @@
+column,missing_before,placeholder_before,total_missing_before,pct_before,missing_after,pct_after,imputed_cells,treatment
+period_label,,,,,0,0.0,0,-
+water_body,,,,,0,0.0,0,-
+station_no,,,,,0,0.0,0,-
+station,,,,,0,0.0,0,-
+latitude,,,,,0,0.0,0,-
+longitude,,,,,0,0.0,0,-
+date,339,13,352,30.7,156,16.6,0,"kept missing (structural gap, never measured)"
+time,354,0,354,30.9,158,16.8,0,"kept missing (structural gap, never measured)"
+year,,,,,0,0.0,0,-
+month,,,,,0,0.0,0,-
+date_source,,,,,0,0.0,0,-
+dissolved_oxygen_mg_l,206,1,207,18.0,0,0.0,1,"station-year median imputation, flagged (Decision B)"
+ph,364,0,364,31.7,156,16.6,2,"station-year median imputation, flagged (Decision B)"
+temperature_c,949,0,949,82.7,743,79.0,0,"kept missing (structural gap, never measured)"
+bod_mg_l,211,2,213,18.6,0,0.0,7,"station-year median imputation, flagged (Decision B)"
+tss_mg_l,364,2,366,31.9,156,16.6,4,"station-year median imputation, flagged (Decision B)"
+color_tcu,954,0,954,83.2,743,79.0,5,"station-year median imputation, flagged (Decision B)"
+fecal_coliform_mpn,897,0,897,78.2,691,73.4,0,"kept missing (structural gap, never measured)"
+total_coliform_mpn,612,2,614,53.5,354,37.6,54,"station-year median imputation, flagged (Decision B)"
+ammonia_mg_l,593,2,595,51.9,354,37.6,35,"station-year median imputation, flagged (Decision B)"
+nitrates_mg_l,364,2,366,31.9,156,16.6,4,"station-year median imputation, flagged (Decision B)"
+phosphates_mg_l,364,2,366,31.9,156,16.6,4,"station-year median imputation, flagged (Decision B)"
+chlorides_mg_l,902,0,902,78.6,696,74.0,0,"kept missing (structural gap, never measured)"
+below_dl,,,,,0,0.0,0,-
+above_range,,,,,0,0.0,0,-
+parse_issues,,,,,0,0.0,0,-
+imputed_params,,,,,0,0.0,0,-
+outlier_params,,,,,0,0.0,0,-

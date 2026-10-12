@@ -1,0 +1,30 @@
+# T3 Variable dictionary — paper sections 3.1 and 4.2  |  run run_20261008_020229
+variable,unit,type_before,type_after,missing_before,missing_after,status,description
+period_label,-,String,String,,0,"kept, renamed (Stage 10)",'CY YYYY MONTH' label of the worksheet block the record sits in
+water_body,name,String,String,,0,kept as-is,partition worksheet the record came from (Marilao / Meycauayan / Obando)
+station_no,code,Int64,Int64,,0,"kept, renamed (Stage 10)",agency station code
+station,name,String,Any,,0,"kept, renamed (Stage 10)","station name, whitespace-normalized in Stage 9"
+latitude,degree,Float64,Float64,,0,"kept, renamed (Stage 10)",north latitude of the station
+longitude,degree,Float64,Float64,,0,"kept, renamed (Stage 10)",east longitude of the station
+date,date,"Date, String","Union{Missing, Date}",339,156,"kept, renamed (Stage 10)",sampling date; missing for 2012 records and never invented
+time,time,"String, Time","Union{Missing, Time}",354,158,"kept, renamed (Stage 10)",sampling time
+year,year,n/a (derived),"Union{Missing, Int64}",,0,derived (Stages 6-7),calendar year derived from date or period label (Stage 7)
+month,month,n/a (derived),"Union{Missing, Int64}",,0,derived (Stages 6-7),calendar month derived from date or period label (Stage 7)
+date_source,source,n/a (derived),String,,0,derived (Stages 6-7),whether year/month came from the date or the period label
+dissolved_oxygen_mg_l,mg/L,"Float64, Int64, String","Union{Missing, Float64}",206,0,"kept, renamed (Stage 10)",dissolved oxygen
+ph,-,"Float64, Int64","Union{Missing, Float64}",364,156,"kept, renamed (Stage 10)",acidity
+temperature_c,deg C,"Float64, Int64","Union{Missing, Float64}",949,743,"kept, renamed (Stage 10)",water temperature
+bod_mg_l,mg/L,"Float64, Int64, String","Union{Missing, Float64}",211,0,"kept, renamed (Stage 10)",biochemical oxygen demand
+tss_mg_l,mg/L,"Float64, Int64, String","Union{Missing, Float64}",364,156,"kept, renamed (Stage 10)",total suspended solids
+color_tcu,TCU,"Float64, Int64","Union{Missing, Float64}",954,743,"kept, renamed (Stage 10)",apparent colour
+fecal_coliform_mpn,MPN/100 mL,"Float64, Int64, String","Union{Missing, Float64}",897,691,"kept, renamed (Stage 10)",fecal coliform count
+total_coliform_mpn,MPN/100 mL,"Float64, Int64, String","Union{Missing, Float64}",612,354,"kept, renamed (Stage 10)",total coliform count
+ammonia_mg_l,mg/L,"Float64, Int64, String","Union{Missing, Float64}",593,354,"kept, renamed (Stage 10)",ammonia
+nitrates_mg_l,mg/L N,"Float64, String","Union{Missing, Float64}",364,156,"kept, renamed (Stage 10)",nitrates as nitrogen
+phosphates_mg_l,mg/L P,"Float64, Int64, String","Union{Missing, Float64}",364,156,"kept, renamed (Stage 10)",phosphates as phosphorous
+chlorides_mg_l,mg/L,"Float64, Int64","Union{Missing, Float64}",902,696,"kept, renamed (Stage 10)",chlorides
+below_dl,flag,n/a (derived),String,,0,derived (Stages 6-7),parameters read as '<x' (below detection) — Decision A flag
+above_range,flag,n/a (derived),String,,0,derived (Stages 6-7),parameters read as '>x' (above reportable range) — Decision A flag
+parse_issues,log,n/a (derived),String,,0,derived (Stages 6-7),cells that could not be parsed (empty in this run)
+imputed_params,flag,n/a (derived),String,,0,derived (Stages 6-7),parameters filled by station-year median — Decision B flag
+outlier_params,flag,n/a (derived),String,,0,derived (Stages 6-7),parameters outside the IQR fences; values retained

@@ -1,0 +1,15 @@
+column,missing,placeholder,total_missing,pct
+Date,339,13,352,30.7
+Time,354,0,354,30.9
+"Dissolved Oxygen, mg/L",206,1,207,18.0
+PH,364,0,364,31.7
+Temperature °C*,949,0,949,82.7
+"Biochemical Oxygen Demand, mg/L",211,2,213,18.6
+"Total Suspended Solids, mg/L",364,2,366,31.9
+Color TCU,954,0,954,83.2
+"Fecal Coliform, MPN/100mL",897,0,897,78.2
+"Total Coliform, MPN/100mL",612,2,614,53.5
+"Ammonia, mg/L",593,2,595,51.9
+"Nitrates as Nitrogen, mg/L",364,2,366,31.9
+"Phosphates as Phosphorous, mg/L",364,2,366,31.9
+Chlorides Cl - (mg/L),902,0,902,78.6

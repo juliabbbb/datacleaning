@@ -1,0 +1,68 @@
+figure,file,title,paper_section,alt,status,note
+F1,fig01,Pipeline workflow (7 stages),3.3,Block diagram of the seven preprocessing stages with record counts at each step.,READY,
+F2,fig02,"Missing values per column, raw",4.1,"Horizontal bars of the share of records missing or placeholder text in each raw column, sorted worst first.",N/A,"Failed to resolve _positions:
+[ComputeEdge] _positions, input_text = #register_arguments!##0((position, text, arg1, ), changed, cached)
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\basic_recipes\text.jl:60
+[Input] position = (::InputFunctionWrapper(:position, AttributeConvert{position, text}))(([83.2, 82.7, 78.6, 78.2, 53.5, 51.9, 31.9, 31.9, 31.9, 31.7, 30.9, 30.7, 18.6, 18.0], [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0]))
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\conversions.jl:941
+Due to ERROR: MethodError: Cannot `convert` an object of type Vector{Float64} to an object of type Float32
+The function `convert` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  convert(::Type{T}, !Matched::IntervalArithmetic.ExactReal) where T<:Real
+   @ IntervalArithmetic C:\Users\santi\.julia\packages\IntervalArithmetic\mlFMS\src\intervals\exact_literals.jl:143
+  convert(::Type{T}, !Matched::T) where T<:Number
+   @ Base number.jl:6
+  convert(::Type{T}, !Matched::Unitful.Gain) where T<:Real
+   @ Unitful C:\Users\santi\.julia\packages\Unitful\ikxOk\src\logarithm.jl:87
+  ...
+"
+F3,fig03,"Missing values per column, before vs after",4.2,Grouped horizontal bars comparing missing share per column before and after cleaning.,N/A,"MethodError: objects of type Float64 are not callable.
+In case you did not try calling it explicitly, check if a Float64 has been passed as an argument to a method that expects a callable instead.
+The object of type `Float64` exists, but no method is defined for this combination of argument types when trying to treat it as a callable object.
+Maybe you forgot to use an operator such as *, ^, %, / etc. ?"
+F4,fig04,Missingness pattern (rows x columns),4.1,Heatmap of missing share per row block and column in the raw table; darker cells mark structured gaps.,N/A,"Error in conversion pipeline. xs and ys should have size ni+1, nj+1. Found: xs: 40, ys: 20, ni: 20, nj: 40"
+F5,fig05,Record flow raw to final,4.2,"Waterfall from extracted records to the analysis-ready dataset, one bar per removal reason.",READY,
+F6,fig06,Invalid entries by rule,4.1,Horizontal bars counting cells flagged by each validity rule in the raw table.,N/A,"Failed to resolve _positions:
+[ComputeEdge] _positions, input_text = #register_arguments!##0((position, text, arg1, ), changed, cached)
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\basic_recipes\text.jl:60
+[Input] position = (::InputFunctionWrapper(:position, AttributeConvert{position, text}))(([197.0, 17.0, 11.0, 5.0, 1.0], [1.0, 2.0, 3.0, 4.0, 5.0]))
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\conversions.jl:941
+Due to ERROR: MethodError: Cannot `convert` an object of type Vector{Float64} to an object of type Float32
+The function `convert` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  convert(::Type{T}, !Matched::IntervalArithmetic.ExactReal) where T<:Real
+   @ IntervalArithmetic C:\Users\santi\.julia\packages\IntervalArithmetic\mlFMS\src\intervals\exact_literals.jl:143
+  convert(::Type{T}, !Matched::T) where T<:Number
+   @ Base number.jl:6
+  convert(::Type{T}, !Matched::Unitful.Gain) where T<:Real
+   @ Unitful C:\Users\santi\.julia\packages\Unitful\ikxOk\src\logarithm.jl:87
+  ...
+"
+F7,fig07,Data types before vs after,4.2,Stacked bars of correct versus incorrect typed columns before and after the type conversion stage.,READY,
+F8,fig08,Outliers per key parameter,4.1,Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept.,READY,
+F9,fig09,Distributions before vs after,4.3,"Paired histograms of eight key parameters, raw in amber and cleaned in mint, log10 axis when skewed.",READY,
+F10,fig10,Central tendency by year with spread,4.3,"Yearly median line with interquartile band for dissolved oxygen, raw records versus cleaned records.",READY,
+F11,fig11,Records by year,4.3,Grouped bars of record counts per year before and after cleaning.,READY,
+F12,fig12,Completeness by column,4.3,Dumbbell chart: completeness of each column before cleaning and after cleaning.,READY,
+F13,fig13,Data quality scorecard,4.3,"Paired horizontal bars for the five scorecard dimensions, before and after, in percent.",READY,
+F14,fig14,Standardization effect,4.2,Bars showing distinct station and period text variants before and after whitespace normalization.,READY,
+F15,fig15,Below-detection-limit share per parameter,4.1,Horizontal bars of the share of measured values that were recorded as '<x' and converted to their threshold.,N/A,"Failed to resolve _positions:
+[ComputeEdge] _positions, input_text = #register_arguments!##0((position, text, arg1, ), changed, cached)
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\basic_recipes\text.jl:60
+[Input] position = (::InputFunctionWrapper(:position, AttributeConvert{position, text}))(([24.840764331210192, 0.17035775127768313, 0.12738853503184713], [1.0, 2.0, 3.0]))
+  @ C:\Users\santi\.julia\packages\Makie\frKXt\src\conversions.jl:941
+Due to ERROR: MethodError: Cannot `convert` an object of type Vector{Float64} to an object of type Float32
+The function `convert` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  convert(::Type{T}, !Matched::IntervalArithmetic.ExactReal) where T<:Real
+   @ IntervalArithmetic C:\Users\santi\.julia\packages\IntervalArithmetic\mlFMS\src\intervals\exact_literals.jl:143
+  convert(::Type{T}, !Matched::T) where T<:Number
+   @ Base number.jl:6
+  convert(::Type{T}, !Matched::Unitful.Gain) where T<:Real
+   @ Unitful C:\Users\santi\.julia\packages\Unitful\ikxOk\src\logarithm.jl:87
+  ...
+"
+F16,fig16,"Correlation among parameters, after cleaning",4.4,Heatmap of pairwise Pearson correlations among the twelve water-quality parameters in the cleaned dataset.,READY,

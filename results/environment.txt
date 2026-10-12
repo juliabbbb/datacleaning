@@ -1,0 +1,10 @@
+Julia 1.13.1
+XLSX 0.12.4
+DataFrames 1.8.2
+CSV 0.10.17
+CairoMakie 0.15.15
+PrettyTables 3.5.0
+Bonito 5.2.0
+JSON3 1.14.3
+WGLMakie 0.13.15
+Colors 0.13.2

@@ -1,0 +1,17 @@
+# T19 Validation checks - paper sections 3.3 and 9  |  run run_20261008_020607
+check,expected,actual,status
+Row conservation: input - removals = output,941,941,PASS
+Column names unique,28,28,PASS
+Schema matches the expected 28 columns,"period_label,water_body,station_no,station,latitude,longitude,date,time,year,month,date_source,dissolved_oxygen_mg_l,ph,temperature_c,bod_mg_l,tss_mg_l,color_tcu,fecal_coliform_mpn,total_coliform_mpn,ammonia_mg_l,nitrates_mg_l,phosphates_mg_l,chlorides_mg_l,below_dl,above_range,parse_issues,imputed_params,outlier_params","period_label,water_body,station_no,station,latitude,longitude,date,time,year,month,date_source,dissolved_oxygen_mg_l,ph,temperature_c,bod_mg_l,tss_mg_l,color_tcu,fecal_coliform_mpn,total_coliform_mpn,ammonia_mg_l,nitrates_mg_l,phosphates_mg_l,chlorides_mg_l,below_dl,above_range,parse_issues,imputed_params,outlier_params",PASS
+pH within 0-14,0..14,6.01..8.94,PASS
+Parameter values non-negative,0,0,PASS
+Coordinates inside the Philippines domain,"5..20 N, 116..127 E","14.709213888888888..14.810347222222223 N, 120.91061666666667..121.02717777777778 E",PASS
+Years within 2012-2018,2012..2018,2012..2018,PASS
+date column typed Date,"Union{Missing, Date}","Union{Missing, Date}",PASS
+time column typed Time,"Union{Missing, Time}","Union{Missing, Time}",PASS
+12 parameters typed Float64,"Union{Missing, Float64}","Union{Missing, Float64}",PASS
+No text left in typed columns,0,0,PASS
+No verifiable duplicate records remain,0,0,PASS
+Every censored cell carries a flag,214,214,PASS
+Every imputed cell carries a flag,116,116,PASS
+Clean CSV reloads with the same shape,941x28,941x28,PASS

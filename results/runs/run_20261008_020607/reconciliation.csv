@@ -1,0 +1,18 @@
+# T18 Row-count reconciliation - paper sections 3.3/9 and 4.3  |  run run_20261008_020607
+scope,step,rows,cumulative
+ALL WORKSHEETS,input: records extracted,1147,1147
+ALL WORKSHEETS,removed: duplicate records,-31,1116
+ALL WORKSHEETS,removed: zero-measurement records,-175,941
+ALL WORKSHEETS,output: analysis-ready records,941,941
+Marilao,input: records extracted,475,475
+Marilao,removed: duplicate records,-31,444
+Marilao,removed: zero-measurement records,-74,370
+Marilao,output: analysis-ready records,370,370
+Meycauayan,input: records extracted,420,420
+Meycauayan,removed: duplicate records,0,420
+Meycauayan,removed: zero-measurement records,-50,370
+Meycauayan,output: analysis-ready records,370,370
+Obando,input: records extracted,252,252
+Obando,removed: duplicate records,0,252
+Obando,removed: zero-measurement records,-51,201
+Obando,output: analysis-ready records,201,201

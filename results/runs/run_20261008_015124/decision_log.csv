@@ -1,0 +1,12 @@
+problem,technique,func,reason,count
+Workbook contains a non-data stub tab,Exclude sheet from processing,stage1_load_and_inspect,"Tab holds only an Excel external-data name, no records",1
+"Inconsistent column headers across sheets (e.g. ""Temperature °C*"" vs ""Temperature °C"")",Positional canonical header mapping,stage1_load_and_inspect,"Sheets are partitions of one schema; positions are identical, only labels differ",2
+Stray cells outside the 18-column schema (misplaced copy of a sampling block),Columns outside schema excluded at extraction,extract_records,Values duplicate data already present in the main table; keeping them would add phantom columns,30
+Duplicate records (station+date+time and exact rows),"Key-based deduplication, keep first",stage5_remove!,"Same station, same date and time = same sampling event; whitespace-normalized key hides formatting variants",31
+Records with no measurements at all,Row removal,stage5_remove!,A record with zero observed parameters carries no information; station metadata repeats on every other row,175
+"Censored water-quality values ('<x' below detection, '>x' above range)",Threshold substitution + below_dl/above_range flags,parse_num_cell / Decision A,Keeps rows analyzable while preserving the censoring information in flag columns; reversible,214
+"Malformed date/time text (double slash, missing space before AM/PM) and number formatting ('26. 344 ')",Regex repair + format-tolerant parsing,parse_date_cell / parse_time_cell / parse_num_cell,Recovers real timestamps and values instead of discarding the records,17
+Scattered parameter gaps inside measured station-years,Station-year median imputation + imputed_params flag,stage7_handle_missing! / Decision B,Only fills gaps where the parameter was measured ≥50% of the time that station-year; every filled cell is flagged,116
+Era-blocked missing values (e.g. pH never measured in 2012),"Kept as missing, justified per column",stage7_handle_missing!,Mean/median filling across eras would fabricate measurements that were never taken,4205
+Potential outliers in water-quality parameters,"IQR flagging (kept, not removed) + z-score cross-check",stage8_flag_outliers!,"Extreme ambient values (anoxic DO, estuarine chlorides) are frequently real events; removal would bias the analysis",357
+Inconsistent station-name spacing across rows,Regex whitespace collapse + strip,stage9_standardize!,Formatting variants would split identical stations into different groups and hide duplicates,941

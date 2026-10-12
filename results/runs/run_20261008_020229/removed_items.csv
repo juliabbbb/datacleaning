@@ -1,0 +1,10 @@
+# T13 Removed items — paper section 4.2  |  run run_20261008_020229
+item,scope,reason,count
+Exact duplicate records,records,"identical full row, keep first",30
+Duplicate records (same station + date + time),records,"same sampling event, keep first",1
+Records with zero measurements,records,"station metadata only, no observed parameter",175
+Cells outside the 18-column schema,cells,stray transposed fragment duplicating the main table,30
+"Non-record content rows (banners, guidelines, footnotes)",rows,not observations,37
+Blank padding rows,rows,no content,1548
+Non-data stub worksheet,sheets,"Excel data-connection tab, no records",1
+TOTAL records removed,records,duplicates + zero-measurement records,206

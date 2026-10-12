@@ -1,0 +1,8 @@
+metric,before,after,unit
+Records,1147.0,941.0,rows
+Variables,20.0,28.0,columns
+Completeness,67.3,79.1,% of cells
+Duplicate records,31.0,0.0,rows
+Invalid entries,231.0,0.0,cells
+Incorrect data types,10.0,0.0,columns (of 14)
+Consistency (standard formatting),0.0,100.0,% of rows

@@ -1,0 +1,9 @@
+token,column,count,mapped_to
+NO SAMPLING,Date,13,missing
+_,"Ammonia, mg/L",2,missing
+-,"Biochemical Oxygen Demand, mg/L",2,missing
+_,"Nitrates as Nitrogen, mg/L",2,missing
+_,"Phosphates as Phosphorous, mg/L",2,missing
+-,"Total Coliform, MPN/100mL",2,missing
+-,"Total Suspended Solids, mg/L",2,missing
+<blank>,"Dissolved Oxygen, mg/L",1,missing

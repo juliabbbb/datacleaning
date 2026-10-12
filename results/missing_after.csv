@@ -1,0 +1,29 @@
+column,eltype,missing_n,missing_pct
+period_label,String,0,0.0
+water_body,String,0,0.0
+station_no,Int64,0,0.0
+station,Any,0,0.0
+latitude,Float64,0,0.0
+longitude,Float64,0,0.0
+date,"Union{Missing, Date}",156,16.6
+time,"Union{Missing, Time}",158,16.8
+year,"Union{Missing, Int64}",0,0.0
+month,"Union{Missing, Int64}",0,0.0
+date_source,String,0,0.0
+dissolved_oxygen_mg_l,"Union{Missing, Float64}",0,0.0
+ph,"Union{Missing, Float64}",156,16.6
+temperature_c,"Union{Missing, Float64}",743,79.0
+bod_mg_l,"Union{Missing, Float64}",0,0.0
+tss_mg_l,"Union{Missing, Float64}",156,16.6
+color_tcu,"Union{Missing, Float64}",743,79.0
+fecal_coliform_mpn,"Union{Missing, Float64}",691,73.4
+total_coliform_mpn,"Union{Missing, Float64}",354,37.6
+ammonia_mg_l,"Union{Missing, Float64}",354,37.6
+nitrates_mg_l,"Union{Missing, Float64}",156,16.6
+phosphates_mg_l,"Union{Missing, Float64}",156,16.6
+chlorides_mg_l,"Union{Missing, Float64}",696,74.0
+below_dl,String,0,0.0
+above_range,String,0,0.0
+parse_issues,String,0,0.0
+imputed_params,String,0,0.0
+outlier_params,String,0,0.0

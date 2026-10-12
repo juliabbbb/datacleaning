@@ -1,0 +1,7 @@
+# T5 REQUIRED before/after table — paper sections 3.4 and 4.1  |  run run_20261008_020229
+data_quality_issue,before,action_taken,after
+Missing Values,7499 (32.7%),placeholder text mapped to missing; 175 zero-measurement records removed; 116 cells station-year median imputation (flagged),4519 (20.9%)
+Duplicate Records,31,"normalized-key deduplication (station+date+time), keep first: 30 exact + 1 same-date/time",0
+Invalid Entries,231,214 censored <x/>x parsed to threshold + flags; 17 malformed cells repaired; range checks passed,0
+Incorrect Data Types,10 of 14 columns,"Date/Time/Float64 parsing of 16 columns (Date, Time, latitude, longitude + 12 parameters)",0 of 14 columns
+Outliers,357 values flagged (293 rows),"IQR flagging only — retained, never removed (extremes can be real events)","357 flagged, 357 retained"

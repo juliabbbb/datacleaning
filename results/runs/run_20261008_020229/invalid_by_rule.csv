@@ -1,0 +1,13 @@
+# T9 Invalid entries by rule — paper section 4.2  |  run run_20261008_020229
+rule,column,flagged,action,examples
+censored value '<x' (below detection limit),"Nitrates as Nitrogen, mg/L",195,threshold kept as the value + below_dl flag (Decision A),<0.05; <0.05; <0.048*; <0.048*; <0.048*
+censored value '<x' (below detection limit),"Total Coliform, MPN/100mL",1,threshold kept as the value + below_dl flag (Decision A),<1.8
+censored value '<x' (below detection limit),"Total Suspended Solids, mg/L",1,threshold kept as the value + below_dl flag (Decision A),<2*
+censored value '>x' (above reportable range),"Fecal Coliform, MPN/100mL",1,threshold kept as the value + above_range flag (Decision A),>160000000
+censored value '>x' (above reportable range),"Total Coliform, MPN/100mL",16,threshold kept as the value + above_range flag (Decision A),>16000000; >1600; >1600; >16000000; >16000000
+coordinate outside Philippines domain,latitude / longitude,0,none found; domain asserted in Stage 11,N/A
+malformed date text,Date,5,regex repair of '//' + tolerant format parsing,10/17//2016; 10/17//2016; 10/17//2016; 10/17//2016; 10/17//2016
+malformed time text,Time,11,regex parse of 'h:mm AM/PM',11:10 AM; 11:31 AM; 11:55 AM; 12:20 PM; 12:41 PM
+negative concentration value,all parameters,0,none found; asserted >= 0 in Stage 11,N/A
+non-numeric text in numeric column,"Ammonia, mg/L",1,"reparsed, otherwise set to missing (parse_issues)",26. 344
+pH outside 0-14,PH,0,none found; range asserted in Stage 11,N/A

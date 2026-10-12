@@ -1,0 +1,431 @@
+figure,file,title,paper_section,alt,status,note
+F1,fig01,Pipeline workflow (7 stages),3.3,Block diagram of the seven preprocessing stages with record counts at each step.,N/A,"UndefVarError: `hidedecor!` not defined in `Main`
+Suggestion: check for spelling errors or missing imports."
+F2,fig02,"Missing values per column, raw",4.1,"Horizontal bars of the share of records missing or placeholder text in each raw column, sorted worst first.",N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F3,fig03,"Missing values per column, before vs after",4.2,Grouped horizontal bars comparing missing share per column before and after cleaning.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F4,fig04,Missingness pattern (rows x columns),4.1,Heatmap of missing share per row block and column in the raw table; darker cells mark structured gaps.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F5,fig05,Record flow raw to final,4.2,"Waterfall from extracted records to the analysis-ready dataset, one bar per removal reason.",N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F6,fig06,Invalid entries by rule,4.1,Horizontal bars counting cells flagged by each validity rule in the raw table.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F7,fig07,Data types before vs after,4.2,Stacked bars of correct versus incorrect typed columns before and after the type conversion stage.,N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F8,fig08,Outliers per key parameter,4.1,Boxplots of eight key parameters on a robust scale with IQR outliers drawn as lavender points and kept.,N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F9,fig09,Distributions before vs after,4.3,"Paired histograms of eight key parameters, raw in amber and cleaned in mint, log10 axis when skewed.",N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F10,fig10,Central tendency by year with spread,4.3,"Yearly median line with interquartile band for dissolved oxygen, raw records versus cleaned records.",N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F11,fig11,Records by year,4.3,Grouped bars of record counts per year before and after cleaning.,N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F12,fig12,Completeness by column,4.3,Dumbbell chart: completeness of each column before cleaning and after cleaning.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F13,fig13,Data quality scorecard,4.3,"Paired horizontal bars for the five scorecard dimensions, before and after, in percent.",N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F14,fig14,Standardization effect,4.2,Bars showing distinct station and period text variants before and after whitespace normalization.,N/A,"MethodError: no method matching backend_show(::WGLMakie.Screen, ::IOStream, ::MIME{Symbol(""image/svg+xml"")}, ::Scene, ::Figure)
+The function `backend_show` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/vnd.webio.application+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""text/html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  backend_show(::WGLMakie.Screen, ::IO, !Matched::MIME{Symbol(""application/prs.juno.plotpane+html"")}, ::Scene, ::Any)
+   @ WGLMakie C:\Users\santi\.julia\packages\WGLMakie\ivwe6\src\display.jl:274
+  ...
+"
+F15,fig15,Below-detection-limit share per parameter,4.1,Horizontal bars of the share of measured values that were recorded as '<x' and converted to their threshold.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"
+F16,fig16,"Correlation among parameters, after cleaning",4.4,Heatmap of pairwise Pearson correlations among the twelve water-quality parameters in the cleaned dataset.,N/A,"Invalid attribute yreverse for block type Axis.
+
+Did you mean yreverse[34m[1md[22m[39m?
+
+The available block attributes for Axis are:
+
+alignmode           titlelineheight     xtickalign          yminorgridwidth   
+aspect              titlesize           xtickcolor          yminortickalign   
+autolimitaspect     titlevisible        xtickformat         yminortickcolor   
+backgroundcolor     topspinecolor       xticklabelalign     yminorticks       
+bottomspinecolor    topspinevisible     xticklabelcolor     yminorticksize    
+bottomspinevisible  valign              xticklabelfont      yminorticksvisible
+dim1_conversion     width               xticklabelpad       yminortickwidth   
+dim2_conversion     xautolimitmargin    xticklabelrotation  ypankey           
+flip_ylabel         xaxisposition       xticklabelsize      ypanlock          
+halign              xgridcolor          xticklabelspace     yrectzoom         
+height              xgridstyle          xticklabelsvisible  yreversed         
+leftspinecolor      xgridvisible        xticks              yscale            
+leftspinevisible    xgridwidth          xticksize           ytickalign        
+limits              xlabel              xticksmirrored      ytickcolor        
+palette             xlabelcolor         xticksvisible       ytickformat       
+panbutton           xlabelfont          xtickwidth          yticklabelalign   
+recomputelimitskey  xlabelpadding       xtrimspine          yticklabelcolor   
+resetlimitskey      xlabelrotation      xzoomkey            yticklabelfont    
+rightspinecolor     xlabelsize          xzoomlock           yticklabelpad     
+rightspinevisible   xlabelvisible       yautolimitmargin    yticklabelrotation
+spinewidth          xminorgridcolor     yaxisposition       yticklabelsize    
+subtitle            xminorgridstyle     ygridcolor          yticklabelspace   
+subtitlecolor       xminorgridvisible   ygridstyle          yticklabelsvisible
+subtitlefont        xminorgridwidth     ygridvisible        yticks            
+subtitlegap         xminortickalign     ygridwidth          yticksize         
+subtitlelineheight  xminortickcolor     ylabel              yticksmirrored    
+subtitlesize        xminorticks         ylabelcolor         yticksvisible     
+subtitlevisible     xminorticksize      ylabelfont          ytickwidth        
+tellheight          xminorticksvisible  ylabelpadding       ytrimspine        
+tellwidth           xminortickwidth     ylabelrotation      yzoomkey          
+title               xpankey             ylabelsize          yzoomlock         
+titlealign          xpanlock            ylabelvisible       zoombutton        
+titlecolor          xrectzoom           yminorgridcolor                       
+titlefont           xreversed           yminorgridstyle                       
+titlegap            xscale              yminorgridvisible                     
+
+"

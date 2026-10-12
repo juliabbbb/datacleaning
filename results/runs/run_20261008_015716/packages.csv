@@ -1,0 +1,15 @@
+package,version,purpose
+XLSX,0.12.4,read the raw workbook: 3 partition sheets + stub tab
+DataFrames,1.8.2,tabular manipulation of the extracted records
+CSV,0.10.17,read and write every results/*.csv artifact
+Statistics,1.11.5,"mean, median, std for imputation and descriptives"
+StatsBase,0.34.13,quantiles / IQR fences for Tukey outlier flagging
+Missings,1.2.0,missing-value utilities
+Dates,1.11.0,Date/Time parsing and year/month extraction
+SHA,1.0.0,raw file fingerprint in run_manifest.json
+CairoMakie,0.15.15,static report figures: SVG + 300 dpi PNG
+Colors,0.13.2,palette tokens parsed to Colorant values
+PrettyTables,3.5.0,readable console summaries
+JSON3,1.14.3,run_manifest.json output
+WGLMakie,0.13.15,interactive figures inside the Bonito app
+Bonito,5.2.0,brutalist UI: live server + static HTML export

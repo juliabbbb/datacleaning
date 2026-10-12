@@ -1,0 +1,20 @@
+metric,value
+Source workbook,MMORS_water_quality_results_2012-2018_orig.xlsx
+File size (bytes),216409
+SHA-256,7b5a52fdc588dc6678328ff2afb416aed46e5a8428eb408a22ed7c6536ad2750
+Worksheets in file,"Table1 (3), Marilao, Meycauayan, Obando"
+Data worksheets,"Marilao, Meycauayan, Obando"
+Records extracted (input),1147
+Period label rows,263
+Non-record rows skipped,37
+Blank rows skipped,1548
+Cells outside the schema skipped,30
+Records after cleaning (output),941
+Variables (raw),20
+Variables (final),28
+Water-quality parameters,12
+Water bodies,3
+Distinct stations,13
+Time coverage,2012-2018
+Run ID,run_20261008_015716
+Run timestamp,2026-10-08 01:57:16

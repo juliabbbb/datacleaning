@@ -1,0 +1,7 @@
+# T17 Data quality scorecard - paper section 4.3  |  run run_20261008_020607
+dimension,before,after,formula
+Completeness,67.3,79.1,non-missing cells / analysis cells (5 documentation flag columns excluded)
+Uniqueness,97.3,100.0,1 - duplicate rows / total rows
+Validity,97.9,100.0,"cells passing format + range rules / cells checked (Date, Time, 12 parameters, coordinates)"
+Consistency,0.0,100.0,1 - rows with non-standard formatting / rows checked
+Type correctness,28.6,100.0,"columns holding only their intended type / 14 checked columns (Date, Time, 12 parameters)"

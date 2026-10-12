@@ -1,0 +1,24 @@
+# Report Evidence: table index  |  run run_20261008_020607
+table,file,title,paper_section,status
+T1,packages.csv,Packages and purposes,3.2,READY
+T2,dataset_profile.csv,Dataset description,3.1,READY
+T3,variable_dictionary.csv,Variable dictionary,"3.1, 4.2",READY
+T4,decision_log.csv,Preprocessing procedure summary,3.3,READY
+T5,quality_summary.csv,REQUIRED before/after table,"3.4, 4.1",READY
+T5b,quality_summary_extra.csv,Additional issues,4.1,READY
+T6,missing_by_column.csv,Missing values per column,4.2,READY
+T7,placeholders.csv,Placeholder tokens,"3.4, 4.2",READY
+T8,duplicates.csv,Duplicate records,4.2,READY
+T9,invalid_by_rule.csv,Invalid entries by rule,4.2,READY
+T10,type_corrections.csv,Data type corrections,4.2,READY
+T11,standardization_map.csv,Standardization map,4.2,READY
+T12,outliers.csv,Outlier summary per parameter,4.2,READY
+T13,removed_items.csv,Columns and records removed,4.2,READY
+T14,transformations.csv,Transformations,4.2,READY
+T15,descriptives_before_after.csv,Descriptive statistics before vs after,4.3,READY
+T16,before_after.csv,Before-and-after comparison,4.3,READY
+T17,scorecard.csv,Data quality scorecard,4.3,READY
+T18,reconciliation.csv,Row-count reconciliation,"3.3/9, 4.3",READY
+T19,validation.csv,Validation checks,3.3/9,READY
+T20,coverage.csv,Coverage: records per year,4.3,READY
+T21,concerns.md,Remaining concerns and limitations,"4.3, 4.4",READY
