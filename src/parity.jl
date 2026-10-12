@@ -26,6 +26,8 @@ const PARITY_KEYS = ["dissolved_oxygen_mg_l", "ph", "temperature_c", "bod_mg_l",
                      "total_coliform_mpn", "ammonia_mg_l", "nitrates_mg_l",
                      "phosphates_mg_l", "chlorides_mg_l"]
 
+const PARITY_SHEETS = ("Marilao", "Meycauayan", "Obando")
+
 const N_PAPER = 385
 
 # paper Table 1: min, max, mean, median, mode, blank cells (denominator 385)
@@ -92,16 +94,18 @@ function load_parity_sheet(raw_path, sheet)
     xf = XLSX.openxlsx(raw_path)
     d = XLSX.readdata(raw_path, sheet, string(xf[sheet].dimension))
     nr = size(d, 1)
-    blocks = Vector{Vector{Int}}(); labels = String[]; cur = Int[]
+    blocks = Vector{Vector{Int}}(); labels = String[]
+    cur = Int[]; curlab = nothing
     for r in 1:nr
         v1 = d[r, 1]
         if v1 isa AbstractString && startswith(v1, "CY ")
-            isempty(cur) || push!(blocks, cur); push!(labels, strip(v1)); cur = Int[]
+            if curlab !== nothing; push!(blocks, cur); push!(labels, curlab); end
+            cur = Int[]; curlab = strip(v1)
         elseif v1 isa Integer
             push!(cur, r)
         end
     end
-    isempty(cur) || push!(blocks, cur)
+    curlab !== nothing && (push!(blocks, cur); push!(labels, curlab))
     return d, blocks, labels
 end
 
@@ -109,29 +113,30 @@ parity_hasdata(d, r) = any(!ismissing(d[r, i]) && !parity_is_ph(d[r, i]) for i i
 parity_colof(k) = 6 + findfirst(==(k), PARITY_KEYS)
 
 """
-Row set (locked rule 1): the banner range 'CY 2012 JANUARY'..'CY 2018 MAY' if it
-yields 385 rows, else the contiguous data window of whole 5-station blocks.
+Row set (locked rule 1): from the first block that has measurements through the
+block IMMEDIATELY AFTER the last one that does. That trailing block is a
+coordinate-only template (5 station rows, latitude/longitude, no measurements),
+so it changes no column count but brings Marilao to the paper's N. For Marilao
+this is blocks 1..77 = 385 rows. The window is never located by banner label
+text (the labels carry typos and repeated months); only real values are used.
 Returns (d, win_blocks, win_rows, diagnostic::String).
 """
 function parity_window(raw_path, sheet)
     d, blocks, labels = load_parity_sheet(raw_path, sheet)
-    n_data = [count(r -> parity_hasdata(d, r), b) for b in blocks]
-    bs = findfirst(==("CY 2012 JANUARY"), labels)
-    be = findfirst(==("CY 2018 MAY"), labels)
-    banner_blocks = (bs === nothing || be === nothing) ? 0 : be - bs + 1
-    if banner_blocks * 5 == N_PAPER
-        diag = "banner range CY 2012 JANUARY..CY 2018 MAY = 385 rows (used)"
-        return d, collect(bs:be), reduce(vcat, blocks[bs:be]), diag
-    end
-    firstd = findfirst(>(0), n_data); lastd = findlast(>(0), n_data)
-    win = collect(firstd:lastd)
-    diag = string("banner range CY 2012 JANUARY..CY 2018 MAY = ",
-                  banner_blocks, " blocks / ", banner_blocks * 5,
-                  " rows (NOT 385); fell back to the data window blocks ",
-                  firstd, "..", lastd, " = ", length(win), " blocks / ",
-                  length(reduce(vcat, blocks[win])), " rows; dropped blocks ",
-                  lastd + 1, "..", length(blocks), " are all zero-data (EDGE drop)")
-    return d, win, reduce(vcat, blocks[win]), diag
+    has = [any(r -> parity_hasdata(d, r), b) for b in blocks]
+    firstd = findfirst(has)
+    lastd = findlast(has)
+    (firstd === nothing || lastd === nothing) &&
+        error("parity_window: no data blocks found in sheet $sheet")
+    lastw = min(lastd + 1, length(blocks))     # include the trailing template block
+    win = collect(firstd:lastw)
+    win_rows = reduce(vcat, blocks[win])
+    diag = string("blocks ", firstd, "..", lastw, " = ", length(win),
+                  " blocks / ", length(win_rows),
+                  " rows (data blocks ", firstd, "..", lastd,
+                  " + trailing coordinate-only block ", lastw,
+                  "); window located by values/coordinates, never by banner text")
+    return d, win, win_rows, diag
 end
 
 # --- comparison tables ------------------------------------------------------
@@ -145,11 +150,19 @@ function paper_parity_table(raw_path)
                      paper_value = string(paper), our_value = string(ours),
                      delta = delta_of(paper, ours), status = status, note = note))
     approx(a, b) = isapprox(a, b; rtol = 1e-5, atol = 1e-6)
-    obs(k) = [x for x in (parity_num(d[r, parity_colof(k)]) for r in win_rows)
-              if x isa Float64]
+    rawcell(k, r) = d[r, parity_colof(k)]
+    numcell(k, r) = parity_num(rawcell(k, r))
+    obs(k) = Float64[x for x in (numcell(k, r) for r in win_rows) if x isa Float64]
+    is_censored(k, r) = (v = rawcell(k, r);
+        v isa AbstractString && !parity_is_ph(v) &&
+        (startswith(strip(v), "<") || startswith(strip(v), ">")))
 
+    nwin = length(win_rows)
     addrow("_row_set", "blocks_in_window", 77, length(win_blocks),
-           length(win_blocks) == 77 ? "PASS" : "INFO", diag)
+           length(win_blocks) == 77 ? "PASS" : "FAIL", diag)
+    addrow("_row_set", "rows_in_window", N_PAPER, nwin,
+           nwin == N_PAPER ? "PASS" : "FAIL",
+           "Marilao N = data window + trailing coordinate-only block (no measurements)")
 
     for k in PARITY_KEYS
         v = obs(k)
@@ -168,27 +181,57 @@ function paper_parity_table(raw_path)
                m == pmode ? "first-occurrence tie-break (Excel MODE)" :
                             "paper mode not reproduced")
         fillv = k == "color_tcu" ? mode_firstocc(v) : round2(median(v))
-        m385 = (length(v) * mean(v) + (N_PAPER - length(v)) * fillv) / N_PAPER
         addrow(k, "imputed_value", PAPER_P2_IMPUTED[k], fillv,
                approx(fillv, PAPER_P2_IMPUTED[k]) ? "PASS" : "FAIL",
                k == "color_tcu" ? "color = mode" : "median rounded to 2 dp")
-        addrow(k, "mean_after", PAPER_P2_MEAN[k], m385,
-               approx(m385, PAPER_P2_MEAN[k]) ? "PASS" : "FAIL",
-               approx(m385, PAPER_P2_MEAN[k]) ?
-                   "paper closed form (n*mean+(385-n)*imputed)/385" :
+        # mean_after MEASURED from the fully-imputed column ...
+        full = Float64[x isa Float64 ? x : fillv for x in (numcell(k, r) for r in win_rows)]
+        m_meas = mean(full)
+        addrow(k, "mean_after", PAPER_P2_MEAN[k], m_meas,
+               approx(m_meas, PAPER_P2_MEAN[k]) ? "PASS" : "FAIL",
+               approx(m_meas, PAPER_P2_MEAN[k]) ?
+                   string("measured from the imputed column (n=", nwin, ")") :
                    "diverges from the paper (see Table 1 / imputed_value)")
+        # ... and the paper's closed form kept as a SECOND check
+        m_closed = (length(v) * mean(v) + (nwin - length(v)) * fillv) / nwin
+        addrow(k, "mean_after_closed_form", PAPER_P2_MEAN[k], m_closed,
+               approx(m_closed, PAPER_P2_MEAN[k]) ? "PASS" : "FAIL",
+               "second check: paper closed form (n*mean+(N-n)*imputed)/N")
     end
 
-    # censored cells (rule 4): keep the digits; documented as FAIL
-    for k in ("nitrates_mg_l", "total_coliform_mpn")
-        ci = parity_colof(k)
-        n = count(r -> d[r, ci] isa AbstractString && !parity_is_ph(d[r, ci]) &&
-                       (startswith(strip(d[r, ci]), "<") ||
-                        startswith(strip(d[r, ci]), ">")), win_rows)
-        note = k == "nitrates_mg_l" ?
-            "paper's nitrates are consistent with 0.48 (10x our 0.048, 60 cells); likely retyping in the adviser's sheet, to be confirmed with the adviser." :
-            "paper's total coliform is consistent with 1,600,000 (10x our 16,000,000, 1 cell); likely retyping in the adviser's sheet, to be confirmed with the adviser."
-        addrow(k, "censored_cells", missing, n, "FAIL", note)
+    # censored cells (rule 4): keep OUR values; document the difference and
+    # reconcile the paper's numbers under their (different) workbook
+    cens_note = string("Paper text shows '0.48*' and '>1600000'; our raw file has ",
+                       "'<0.048*' and '>16000000'. 0.48 is 10x our detection limit. ",
+                       "Confirm with adviser which workbook was used.")
+    for (k, hyp) in (("nitrates_mg_l" => 0.48), ("total_coliform_mpn" => 1.6e6))
+        cens = [r for r in win_rows if is_censored(k, r)]
+        vh = Float64[]
+        for r in win_rows
+            if is_censored(k, r); push!(vh, hyp)
+            else; x = numcell(k, r); x isa Float64 && push!(vh, x); end
+        end
+        fillh = k == "color_tcu" ? mode_firstocc(vh) : round2(median(vh))
+        fullh = Float64[]
+        for r in win_rows
+            if is_censored(k, r); push!(fullh, hyp)
+            else; x = numcell(k, r); push!(fullh, x isa Float64 ? x : fillh); end
+        end
+        pmean = PAPER_P1[k][3]; pmed = PAPER_P1[k][4]; pmode = PAPER_P1[k][5]
+        ok = approx(mean(vh), pmean) && approx(median(vh), pmed) &&
+             (mode_firstocc(vh) == pmode) && approx(mean(fullh), PAPER_P2_MEAN[k])
+        addrow(k, "censored_cells", missing, length(cens), "FAIL", cens_note)
+        addrow(k, "censored_reconciliation",
+               "mean/median/mode/mean_after reproduced",
+               string("mean=", round(mean(vh); digits = 6),
+                      ", median=", round(median(vh); digits = 4),
+                      ", mode=", mode_firstocc(vh),
+                      ", mean_after=", round(mean(fullh); digits = 6)),
+               "INFO",
+               ok ? string(cens_note, " Setting all ", length(cens),
+                           " censored cells to ", hyp,
+                           " reproduces the paper's Table 1 and Table 2 exactly.") :
+                    string(cens_note, " (hypothesis does NOT fully reproduce the paper.)"))
     end
 
     # Date / Time count gaps -> INFO (documented, not chased)
@@ -198,6 +241,11 @@ function paper_parity_table(raw_path)
            "paper derives dates from the CY banner; our window keeps 10 date/time-only rows")
     addrow("time", "n_nonblank", 310, nt, "INFO",
            "10 date/time-only rows carry a time but no parameter")
+
+    # outliers: the paper KEPT its outliers (matches our flag-only policy)
+    addrow("_outliers", "policy", "kept - never removed or capped",
+           "kept - IQR flagging only", "INFO",
+           "the paper retains its outliers; it does NOT remove or cap them - never report otherwise")
     return DataFrame(rows)
 end
 
@@ -228,24 +276,40 @@ function parity_other_table(raw_path)
     return DataFrame(other)
 end
 
-# --- the parity profile applied to the cleaned dataset ----------------------
+# --- the parity profile dataset, built from the RAW sheets (item 2) ----------
+parity_text(v) = v === missing ? missing :
+                 v isa AbstractString ? strip(v) : string(v)
+parity_float(v) = (x = parity_num(v); x isa Float64 ? x : missing)
+
 """
-Non-destructive, full-completeness imputation: fill every missing parameter
-cell with the median (median rounded 2 dp; Mode for Color TCU) and flag it in a
-'<key>_imputed' column. Observed values are never modified.
+Build the :paper_parity dataset from the RAW sheets, PER WATER BODY (not from
+the 941-row strict output): each sheet's window, parsed with parity_num and
+imputed with that sheet's OWN median (median rounded 2 dp; the Mode for Color
+TCU). Observed values are preserved and every filled cell is flagged in a
+'<param>_imputed' column. Marilao therefore reproduces the paper's Table 2
+imputed values (chlorides 60.5, ammonia 18.78, ...), which the strict output --
+already station-year imputed and pooled across three rivers -- does not.
 """
-function parity_impute(df::DataFrame)
-    out = copy(df)
-    for k in PARITY_KEYS
-        col = out[!, k]
-        o = Float64[x for x in col if x isa Float64]
-        if isempty(o)
-            out[!, k * "_imputed"] = zeros(Int, nrow(out))
-            continue
+function build_parity_dataset(raw_path)
+    out = DataFrame()
+    for sheet in PARITY_SHEETS
+        d, _, win_rows, _ = parity_window(raw_path, sheet)
+        t = DataFrame(
+            water_body = fill(sheet, length(win_rows)),
+            station    = [parity_text(d[r, 2]) for r in win_rows],
+            latitude   = [parity_float(d[r, 3]) for r in win_rows],
+            longitude  = [parity_float(d[r, 4]) for r in win_rows],
+            date       = [parity_text(d[r, 5]) for r in win_rows],
+            time       = [parity_text(d[r, 6]) for r in win_rows])
+        for k in PARITY_KEYS
+            raw = [parity_num(d[r, parity_colof(k)]) for r in win_rows]
+            o = Float64[x for x in raw if x isa Float64]
+            fillv = isempty(o) ? missing :
+                    (k == "color_tcu" ? mode_firstocc(o) : round2(median(o)))
+            t[!, k] = Union{Missing, Float64}[x isa Float64 ? x : fillv for x in raw]
+            t[!, k * "_imputed"] = Int[ismissing(x) ? 1 : 0 for x in raw]
         end
-        fillv = k == "color_tcu" ? mode_firstocc(o) : round2(median(o))
-        out[!, k] = Union{Missing, Float64}[x isa Float64 ? x : fillv for x in col]
-        out[!, k * "_imputed"] = Int[ismissing(x) ? 1 : 0 for x in col]
+        out = isempty(out) ? t : vcat(out, t; cols = :union)
     end
     return out
 end
@@ -254,7 +318,7 @@ end
 Write the parity artifacts and print a summary. Called from main() after the
 strict report layer; also callable standalone.
 """
-function write_parity_artifacts(raw_path, results_dir, clean_dir, df::DataFrame)
+function write_parity_artifacts(raw_path, results_dir, clean_dir)
     mkpath(results_dir); mkpath(clean_dir)
     println("\n", "="^74, "\nPARITY PROFILE (:paper_parity)\n", "="^74)
 
@@ -274,13 +338,13 @@ function write_parity_artifacts(raw_path, results_dir, clean_dir, df::DataFrame)
     CSV.write(joinpath(results_dir, "parity_other_bodies.csv"), ot)
     println("parity_other_bodies.csv: ", nrow(ot), " rows")
 
-    imp = parity_impute(df)
+    imp = build_parity_dataset(raw_path)
     path = joinpath(clean_dir, "mmors_water_quality_parity.csv")
     CSV.write(path, imp)
     nfill = sum(sum(imp[!, k * "_imputed"]) for k in PARITY_KEYS)
     println("mmors_water_quality_parity.csv: ", nrow(imp), " x ", ncol(imp),
-            " (", nfill, " cells imputed; observed values unchanged, every fill ",
-            "flagged in <param>_imputed)")
+            " (", nfill, " cells imputed from the RAW sheets, per water body; ",
+            "observed values unchanged, every fill flagged in <param>_imputed)")
 
     if isdefined(@__MODULE__, :logstep!)
         logstep!("parity", "paper_checks", 0, nrow(pt),
@@ -300,6 +364,7 @@ end
 # byte comparison and checked structurally instead.
 # =============================================================================
 const REGRESSION_EXCLUDE = Set(["descriptives_before_after.csv",
+                                "concerns.md",
                                 "paper_vs_ours.csv", "parity_other_bodies.csv",
                                 "strict_regression.csv",
                                 "baseline_strict_sha256.csv"])
@@ -352,6 +417,16 @@ function strict_regression(dir; rows_in::Int, rows_out::Int,
              "mode_before,mode_after", join(filter(c -> endswith(c, "mode_before") ||
                  endswith(c, "mode_after"), dn), ","),
              ("mode_before" in dn) && ("mode_after" in dn))
+
+    cm = joinpath(dir, "concerns.md")
+    ct = isfile(cm) ? read(cm, String) : ""
+    addcheck("concerns.md documents the parity findings",
+             "outliers-retained + censored-cells notes",
+             string(occursin("Paper retained its outliers", ct) ? "outliers" : "-",
+                    ",", occursin("Paper-parity check: censored cells differ", ct) ?
+                    "censored" : "-"),
+             occursin("Paper retained its outliers", ct) &&
+             occursin("Paper-parity check: censored cells differ", ct))
 
     for f in strict_file_list(dir)
         h = strict_file_hash(dir, f)

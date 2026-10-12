@@ -1,4 +1,4 @@
-# T16 Before-and-after comparison - paper section 4.3  |  run run_20261012_160011
+# T16 Before-and-after comparison - paper section 4.3  |  run run_20261012_161625
 metric,before,after,unit
 Records,1147.0,941.0,rows
 Variables,20.0,28.0,columns

@@ -31,3 +31,16 @@ end
 ot = parity_other_table(RAW)
 CSV.write(joinpath(RESULTS, "parity_other_bodies.csv"), ot)
 println("parity_other_bodies.csv: ", nrow(ot), " rows")
+
+imp = build_parity_dataset(RAW)
+CLEAN = joinpath(ROOT, "data", "clean"); mkpath(CLEAN)
+CSV.write(joinpath(CLEAN, "mmors_water_quality_parity.csv"), imp)
+println("mmors_water_quality_parity.csv: ", nrow(imp), " x ", ncol(imp))
+
+mar = imp[imp.water_body .== "Marilao", :]
+println("Marilao imputed values (ours vs paper Table 2):")
+for k in PARITY_KEYS
+    idx = findall(==(1), mar[!, k * "_imputed"])
+    fill = isempty(idx) ? missing : mar[idx[1], k]
+    println("   ", rpad(k, 22), " ours=", fill, "  paper=", PAPER_P2_IMPUTED[k])
+end

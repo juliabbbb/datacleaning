@@ -1,4 +1,4 @@
-# T15 Descriptive statistics before vs after - paper section 4.3  |  run run_20261012_160011
+# T15 Descriptive statistics before vs after - paper section 4.3  |  run run_20261012_161625
 parameter,n_before,mean_before,median_before,sd_before,min_before,max_before,mode_before,n_after,mean_after,median_after,sd_after,min_after,max_after,mode_after
 dissolved_oxygen_mg_l,940,1.708,1.2,1.439,0.0,7.48,1.1,941,1.707,1.2,1.439,0.0,7.48,1.1
 ph,783,7.599,7.65,0.534,6.01,8.94,8.1,785,7.599,7.65,0.533,6.01,8.94,8.1
