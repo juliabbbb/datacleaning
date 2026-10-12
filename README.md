@@ -48,7 +48,7 @@ records. Extraction is positional against the inspected fixed layout.
 ## Outputs
 
 - `data/clean/mmors_water_quality_clean.csv` — analysis-ready dataset
-  (941 rows × 28 columns)
+  (941 rows × 29 columns)
 - `results/step_log.csv` — before/after count of every cleaning step
 - `results/decision_log.csv` — problem → technique → Julia function →
   reason → count (basis for the report's §3.3)
