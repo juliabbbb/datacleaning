@@ -1,4 +1,4 @@
-# T1 Packages and purposes - paper section 3.2  |  run run_20261012_173913
+# T1 Packages and purposes - paper section 3.2  |  run run_20261019_031423
 package,version,purpose
 XLSX,0.12.4,read the raw workbook: 3 partition sheets + stub tab
 DataFrames,1.8.2,tabular manipulation of the extracted records

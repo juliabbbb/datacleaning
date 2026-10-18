@@ -260,11 +260,11 @@ function write_report_artifacts(ctx)
     n_raw_rows, n_raw_cols = size(raw)
     n_rows, n_cols = size(df)
     n_raw_cols = n_analysis(raw)      # excludes the provenance key record_id
-    n_cols = n_analysis(df)
+    n_cols = ncol(df)                 # full schema incl. record_id (paper: 29)
     miss_b = sum(miss_before.total_missing)                 # 7499
     miss_a = after.n_missing                                # 4519
     cells_b = n_raw_rows * n_raw_cols
-    cells_a = n_rows * (n_cols - 5)                         # 5 flag/doc cols
+    cells_a = n_rows * (n_cols - 6)     # record_id + 5 flag/doc cols -> 23 analysis vars
     bad_after = count(c -> any(v -> v isa AbstractString, df[!, c]), typed_f)
     n_repaired = inv.n_stray - (types6.n_below + types6.n_above) - types6.n_issue
 

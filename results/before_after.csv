@@ -1,7 +1,7 @@
-# T16 Before-and-after comparison - paper section 4.3  |  run run_20261012_173913
+# T16 Before-and-after comparison - paper section 4.3  |  run run_20261019_031423
 metric,before,after,unit
 Records,1147.0,941.0,rows
-Variables,20.0,28.0,columns
+Variables,20.0,29.0,columns
 Completeness,67.3,79.1,% of cells
 Duplicate records,31.0,0.0,rows
 Invalid entries,231.0,0.0,cells

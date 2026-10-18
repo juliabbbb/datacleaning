@@ -1,4 +1,4 @@
-# T12 Outlier summary per parameter - paper section 4.2  |  run run_20261012_173913
+# T12 Outlier summary per parameter - paper section 4.2  |  run run_20261019_031423
 parameter,n,missing,mean,q1,q3,lower_fence,upper_fence,n_iqr_outliers,n_zscore_gt3,min,max,fence_method
 dissolved_oxygen_mg_l,941,0,1.707,0.58,2.7,-2.6,5.88,7,7,0.0,7.48,pooled across all water bodies (primary profile)
 ph,785,156,7.599,7.22,7.97,6.095,9.095,1,0,6.01,8.94,pooled across all water bodies (primary profile)
