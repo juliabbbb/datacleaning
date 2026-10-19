@@ -45,8 +45,9 @@ const FINAL_TO_RAW = Dict{String, String}(v => k for (k, v) in RENAME_MAP)
 
 const TYPED_RAW = ["Date", "Time", PARAM_NAMES...]
 
-ftitle(fig, txt) = Label(fig[0, 1], txt; fontsize = 20, font = :bold,
-                          color = col(INK), tellwidth = false)
+ftitle(fig, txt; span = 1) = Label(fig[0, 1:span], txt; fontsize = 20,
+                                    font = :bold, color = col(INK),
+                                    tellwidth = false)
 
 # =============================================================================
 # F1 — pipeline workflow (block diagram)
@@ -91,7 +92,7 @@ function fig01_workflow(fd)
             arrows!(ax, [0.5], [y - 1.07], [0.0], [-0.36]; color = col(INK),
                     linewidth = 3, arrowsize = 18)
     end
-    ax.limits = (-0.02, 1.02, -9.35, 0.18)
+    ax.limits = (-0.02, 1.02, -10.2, 0.18)
     fig
 end
 
@@ -295,7 +296,7 @@ function fig07_types(fd)
               align = (:center, :bottom), fontsize = 14, offset = (0, 8))
     end
     text!(ax, "MINT = intended type   VERMILION = text in a typed column";
-          position = (0.5, 1.0), space = :relative, align = (:left, :top),
+          position = (0.5, 1.0), space = :relative, align = (:center, :top),
           fontsize = 13)
     ax.limits = (0.5, 2.5, 0, nchk * 1.18)
     fig
@@ -355,7 +356,8 @@ end
 function fig09_distributions(fd)
     df = fd.df
     fig = Figure(size = (1520, 880))
-    ftitle(fig, "FIG. 9. DISTRIBUTIONS BEFORE vs AFTER  |  amber = raw, mint = cleaned")
+    ftitle(fig, "FIG. 9. DISTRIBUTIONS BEFORE vs AFTER  |  amber = raw, mint = cleaned";
+           span = 4)
     for (k, (p, lab)) in enumerate(BOX8)
         ax = Axis(fig[cld(k, 4), mod1(k, 4)];
                   xlabel = lab, ylabel = "records")
